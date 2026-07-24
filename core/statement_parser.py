@@ -1,16 +1,19 @@
+from __future__ import annotations
 
 import json
 import re
 from pathlib import Path
+
 from bs4 import BeautifulSoup
+
 from core.transaction_normalizer import TransactionNormalizer
+from models.report import FinancialReport
+from models.enums import BankName
 
 
 class StatementParser:
     """
-    Parses LlamaParse HTML/Markdown bank statements into a structured format.
-    Current implementation is tuned for the SBI layout but is written to be
-    easy to extend for additional banks.
+    Parses a bank statement into a FinancialReport.
     """
 
     def __init__(self, markdown_file):
@@ -19,78 +22,64 @@ class StatementParser:
         with open(self.markdown_file, "r", encoding="utf-8") as f:
             self.text = f.read()
 
-        self.data = {
-            "bank": None,
-            "statement_period": None,
-            "account": {},
-            "transactions": []
-        }
+        self.report = FinancialReport()
 
     def extract_bank(self):
         t = self.text.upper()
+
         if "SBI" in t:
-            self.data["bank"] = "SBI"
+            self.report.account.bank = BankName.SBI
         elif "AXIS" in t:
-            self.data["bank"] = "Axis"
+            self.report.account.bank = BankName.AXIS
         elif "HDFC" in t:
-            self.data["bank"] = "HDFC"
+            self.report.account.bank = BankName.HDFC
         elif "ICICI" in t:
-            self.data["bank"] = "ICICI"
+            self.report.account.bank = BankName.ICICI
         else:
-            self.data["bank"] = "Unknown"
+            self.report.metadata["bank"] = "Unknown"
 
     def extract_statement_period(self):
         m = re.search(r"As on (\d{2}-\d{2}-\d{2})", self.text)
         if m:
-            self.data["statement_period"] = m.group(1)
+            self.report.metadata["statement_period"] = m.group(1)
 
     def _extract_field(self, label):
         m = re.search(
             rf"{re.escape(label)}</td>\s*<td>(.*?)</td>",
             self.text,
-            flags=re.DOTALL | re.IGNORECASE
+            flags=re.DOTALL | re.IGNORECASE,
         )
         return m.group(1).strip() if m else None
 
     def extract_account(self):
-        self.data["account"] = {
-            "holder": self._extract_field("Name of the Account Holder"),
-            "branch": self._extract_field("Branch Name"),
-            "ifsc": self._extract_field("IFSC Code"),
-            "mode_of_operation": self._extract_field("Mode of Operation")
-        }
+        self.report.account.holder = self._extract_field("Name of the Account Holder")
+        self.report.account.branch = self._extract_field("Branch Name")
+        self.report.account.ifsc = self._extract_field("IFSC Code")
+        self.report.metadata["mode_of_operation"] = self._extract_field("Mode of Operation")
 
     def extract_balances(self):
         opening = re.search(r"Opening Balance.*?₹\s*([\d,]+\.\d+)", self.text, re.DOTALL)
         closing = re.search(r"Closing Balance.*?₹\s*([\d,]+\.\d+)", self.text, re.DOTALL)
 
         if opening:
-            self.data["account"]["opening_balance"] = float(opening.group(1).replace(",", ""))
+            self.report.account.opening_balance = float(opening.group(1).replace(",", ""))
         if closing:
-            self.data["account"]["closing_balance"] = float(closing.group(1).replace(",", ""))
+            self.report.account.closing_balance = float(closing.group(1).replace(",", ""))
 
     @staticmethod
     def _parse_reference(reference):
-        mode = "OTHER"
-        ref_no = ""
-        party = ""
-        bank = ""
+        mode, ref_no, party, bank = "OTHER", "", "", ""
 
         if "/" in reference:
             parts = [p.strip() for p in reference.split("/")]
-
             if len(parts) > 0:
                 mode = parts[0]
-
             if len(parts) > 2:
                 ref_no = parts[2]
-
             if len(parts) > 3:
                 party = parts[3]
-
             if len(parts) > 4:
                 bank = parts[4]
-
         else:
             party = reference
 
@@ -100,14 +89,12 @@ class StatementParser:
         soup = BeautifulSoup(self.text, "html.parser")
 
         for table in soup.find_all("table"):
-
             headers = [h.get_text(" ", strip=True) for h in table.find_all("th")]
 
             if "Date" not in headers or "Balance" not in headers:
                 continue
 
             for row in table.find_all("tr"):
-
                 cells = row.find_all("td")
 
                 if len(cells) != 6:
@@ -115,10 +102,7 @@ class StatementParser:
 
                 values = [c.get_text(" ", strip=True) for c in cells]
 
-                if "Opening Balance" in values[0]:
-                    continue
-
-                if "Closing Balance" in values[0]:
+                if "Opening Balance" in values[0] or "Closing Balance" in values[0]:
                     continue
 
                 date, reference, cheque, credit, debit, balance = values
@@ -155,7 +139,7 @@ class StatementParser:
                 }
 
                 transaction = TransactionNormalizer.normalize(raw)
-                self.data["transactions"].append(transaction)
+                self.report.add_transaction(transaction)
 
     def parse(self):
         self.extract_bank()
@@ -163,12 +147,16 @@ class StatementParser:
         self.extract_account()
         self.extract_balances()
         self.extract_transactions()
-        return self.data
+        return self.report
 
     def save(self, output_path):
         output_path = Path(output_path)
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(self.data, f, indent=4, ensure_ascii=False)
-
+            json.dump(
+                self.report.to_dict(),
+                f,
+                indent=4,
+                ensure_ascii=False,
+            )
