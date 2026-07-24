@@ -1,0 +1,26 @@
+{
+    "bank": "SBI",
+    "statement_period": "30-06-26",
+    "account": {
+        "holder": "Mr. Adarsh Bind",
+        "branch": "CHHANBEY (VIJAYPUR)",
+        "ifsc": "SBIN0015131",
+        "opening_balance": 2968.88,
+        "closing_balance": 2265.88
+    },
+    "transactions": [
+        {
+            "date": "30-06-26",
+            "description": "UPI/DR/213043659591/RAJESH K/IPOS/9936075171/NO RE",
+            "type": "DEBIT",
+            "amount": 25.0,
+            "balance": 2265.88,
+            "cheque_number": "-",
+            "mode": "UPI",
+            "reference_number": "213043659591",
+            "party": "RAJESH K",
+            "bank": "IPOS",
+            "category": "UPI"
+        }
+    ]
+}
