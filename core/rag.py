@@ -20,7 +20,7 @@ class FinancialRAG:
 
     def __init__(
         self,
-        report: FinancialReport,
+        report: FinancialReport | None = None,
         llm: LLMClient | None = None,
         vector_db_path: str = "data/vector_db",
     ):
@@ -34,6 +34,10 @@ class FinancialRAG:
 
         except Exception:
 
+            if report is None:
+                raise FileNotFoundError(
+                    f"No vector database found at {vector_db_path}"
+                )
             embedding_engine = EmbeddingEngine(report)
 
             result = embedding_engine.generate_embeddings()

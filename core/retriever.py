@@ -1,11 +1,6 @@
-
-"""
-core/retriever.py
-
-Semantic retriever for FinSight AI.
-"""
-
 from __future__ import annotations
+
+from pathlib import Path
 
 from sentence_transformers import SentenceTransformer
 
@@ -13,13 +8,33 @@ from core.vector_store import VectorStore
 
 
 class Retriever:
+
     MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
-    def __init__(self, vector_store: VectorStore):
-        self.vector_store = vector_store
-        self.model = SentenceTransformer(self.MODEL_NAME)
+    def __init__(
+        self,
+        vector_store: VectorStore | str | Path,
+    ):
 
-    def embed_query(self, query: str):
+        if isinstance(
+            vector_store,
+            (str, Path)
+        ):
+            self.vector_store = VectorStore.load(
+                vector_store
+            )
+        else:
+            self.vector_store = vector_store
+
+        self.model = SentenceTransformer(
+            self.MODEL_NAME
+        )
+
+    def embed_query(
+        self,
+        query: str,
+    ):
+
         return self.model.encode(
             [query],
             convert_to_numpy=True,
@@ -27,18 +42,31 @@ class Retriever:
             show_progress_bar=False,
         )[0]
 
-    def retrieve(self, query: str, top_k: int = 5):
-        """
-        Returns the most relevant chunks for the query.
-        """
-        query_embedding = self.embed_query(query)
-        return self.vector_store.search(query_embedding, top_k)
+    def retrieve(
+        self,
+        query: str,
+        top_k: int = 5,
+    ):
 
-    def retrieve_context(self, query: str, top_k: int = 5):
-        """
-        Returns a single context string suitable for an LLM prompt.
-        """
-        results = self.retrieve(query, top_k)
+        query_embedding = self.embed_query(
+            query
+        )
+
+        return self.vector_store.search(
+            query_embedding,
+            top_k
+        )
+
+    def retrieve_context(
+        self,
+        query: str,
+        top_k: int = 5,
+    ):
+
+        results = self.retrieve(
+            query,
+            top_k
+        )
 
         context = "\n\n".join(
             f"[{item['section']}]\n{item['text']}"

@@ -1,3 +1,6 @@
+import sys
+from pathlib import Path
+
 
 from core.statement_parser import StatementParser
 from core.analytics import AnalyticsEngine
@@ -92,3 +95,4 @@ for i, question in enumerate(questions, start=1):
     print(response["answer"])
 
     print("\n")
+    

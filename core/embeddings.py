@@ -174,7 +174,7 @@ Type: {ttype}
     def embedding_dimension():
         return SentenceTransformer(
             EmbeddingEngine.MODEL_NAME
-        ).get_sentence_embedding_dimension()
+        ).get_embedding_dimension()
 
     @staticmethod
     def cosine_similarity(v1: np.ndarray, v2: np.ndarray):

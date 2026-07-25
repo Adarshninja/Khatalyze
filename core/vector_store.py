@@ -47,9 +47,9 @@ class VectorStore:
 
             results.append({
                 "score": float(score),
-                "chunk_id": idx,
-                "section": self.chunks[idx].get("section"),
-                "text": self.chunks[idx].get("text"),
+                "chunk_id": int(idx),
+                "section": self.chunks[int(idx)].get("section"),
+                "text": self.chunks[int(idx)].get("text"),
             })
 
         return results

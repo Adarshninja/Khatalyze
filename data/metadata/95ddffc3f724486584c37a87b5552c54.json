@@ -1,0 +1,18 @@
+{
+    "statement_id": "95ddffc3f724486584c37a87b5552c54",
+    "original_filename": "adarsh-statement.pdf",
+    "stored_filename": "95ddffc3f724486584c37a87b5552c54.pdf",
+    "password": "56323010904",
+    "uploaded_at": "2026-07-25T15:50:35.749499+00:00",
+    "analysis_started": "2026-07-25T15:50:51.779978+00:00",
+    "analysis_completed": "2026-07-25T15:52:03.326005+00:00",
+    "status": "completed",
+    "bank": "BankName.SBI",
+    "files": {
+        "pdf": "data\\decrypted\\95ddffc3f724486584c37a87b5552c54.pdf",
+        "markdown": "data\\parsed\\95ddffc3f724486584c37a87b5552c54.md",
+        "text": "data\\parsed\\95ddffc3f724486584c37a87b5552c54.txt",
+        "structured": "data\\structured\\95ddffc3f724486584c37a87b5552c54.json",
+        "vector_db": "data\\vector_db\\95ddffc3f724486584c37a87b5552c54"
+    }
+}
