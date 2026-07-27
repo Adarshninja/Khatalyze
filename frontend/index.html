@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khatalyze — AI Financial Statement Analyzer</title>
+    <meta name="description" content="Upload your bank statement PDF and get AI-powered financial insights, risk analysis, and smart recommendations.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+
+        <!-- ============================================ -->
+        <!-- UPLOAD VIEW                                  -->
+        <!-- ============================================ -->
+        <section id="upload-view" class="view active">
+            <div class="upload-bg-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+                <div class="orb orb-3"></div>
+            </div>
+            <div class="upload-container">
+                <div class="brand">
+                    <div class="brand-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect x="4" y="8" width="40" height="32" rx="4" stroke="url(#g1)" stroke-width="2.5"/>
+                            <path d="M4 16h40" stroke="url(#g1)" stroke-width="2"/>
+                            <path d="M14 24h10M14 30h16M14 36h8" stroke="url(#g1)" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="36" cy="32" r="8" fill="url(#g1)" opacity="0.2"/>
+                            <path d="M33 32l2 2 4-4" stroke="url(#g1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs><linearGradient id="g1" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#818cf8"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <h1>Khatalyze</h1>
+                    <p class="brand-tagline">AI-Powered Financial Statement Analyzer</p>
+                </div>
+
+                <div class="upload-card glass-card">
+                    <div id="drop-zone" class="drop-zone">
+                        <div class="drop-zone-icon">
+                            <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                <rect x="8" y="12" width="40" height="36" rx="4" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
+                                <path d="M28 22v16M22 28l6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <p class="drop-zone-title">Drop your bank statement here</p>
+                        <p class="drop-zone-subtitle">or click to browse files</p>
+                        <span class="drop-zone-hint">Supports PDF files • Password-protected PDFs welcome</span>
+                        <input type="file" id="file-input" accept=".pdf" hidden>
+                    </div>
+
+                    <div id="file-preview" class="file-preview hidden">
+                        <div class="file-preview-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="currentColor" stroke-width="1.5"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </div>
+                        <div class="file-preview-info">
+                            <span id="file-name" class="file-preview-name"></span>
+                            <span id="file-size" class="file-preview-size"></span>
+                        </div>
+                        <button id="file-remove" class="file-preview-remove" title="Remove file">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        </button>
+                    </div>
+
+                    <div class="password-section">
+                        <label class="checkbox-label" for="has-password">
+                            <input type="checkbox" id="has-password">
+                            <span class="checkbox-custom"></span>
+                            <span>PDF is password-protected</span>
+                        </label>
+                        <div id="password-field" class="password-field hidden">
+                            <div class="input-wrapper">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                <input type="password" id="pdf-password" placeholder="Enter PDF password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="upload-btn" class="btn-primary" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span>Upload & Analyze</span>
+                    </button>
+                </div>
+
+                <p class="upload-footer">Your data stays local • Processed securely on your machine</p>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- PROCESSING VIEW                              -->
+        <!-- ============================================ -->
+        <section id="processing-view" class="view">
+            <div class="processing-container">
+                <div class="processing-spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-percent" id="processing-percent">0%</div>
+                </div>
+                <h2 class="processing-title">Analyzing Your Statement</h2>
+                <p class="processing-subtitle" id="processing-status">Preparing...</p>
+                <div class="processing-steps">
+                    <div class="proc-step" data-step="upload">
+                        <div class="proc-step-dot"></div>
+                        <span>Uploading PDF</span>
+                    </div>
+                    <div class="proc-step" data-step="parse">
+                        <div class="proc-step-dot"></div>
+                        <span>Parsing statement</span>
+                    </div>
+                    <div class="proc-step" data-step="analyze">
+                        <div class="proc-step-dot"></div>
+                        <span>Running analytics</span>
+                    </div>
+                    <div class="proc-step" data-step="insights">
+                        <div class="proc-step-dot"></div>
+                        <span>Generating AI insights</span>
+                    </div>
+                    <div class="proc-step" data-step="vector">
+                        <div class="proc-step-dot"></div>
+                        <span>Building knowledge base</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- DASHBOARD VIEW                               -->
+        <!-- ============================================ -->
+        <section id="dashboard-view" class="view">
+            <!-- Dashboard Header -->
+            <header class="dash-header">
+                <div class="dash-header-left">
+                    <div class="dash-logo">
+                        <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
+                            <rect x="4" y="8" width="40" height="32" rx="4" stroke="url(#g2)" stroke-width="2.5"/>
+                            <path d="M4 16h40" stroke="url(#g2)" stroke-width="2"/>
+                            <path d="M14 24h10M14 30h16" stroke="url(#g2)" stroke-width="2" stroke-linecap="round"/>
+                            <defs><linearGradient id="g2" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#818cf8"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs>
+                        </svg>
+                        <span>Khatalyze</span>
+                    </div>
+                    <div class="dash-account-info" id="account-info"></div>
+                </div>
+                <div class="dash-header-right">
+                    <button id="new-upload-btn" class="btn-ghost">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        New Statement
+                    </button>
+                    <button id="chat-toggle-btn" class="btn-accent">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        AI Chat
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="dash-content">
+
+                <!-- Row 1: Health Score + KPIs -->
+                <div class="overview-row">
+                    <div class="health-card glass-card" id="health-card">
+                        <div class="health-label">Financial Health</div>
+                        <div class="health-gauge">
+                            <svg viewBox="0 0 200 200" class="health-ring">
+                                <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="12"/>
+                                <circle cx="100" cy="100" r="85" fill="none" stroke="url(#healthGrad)" stroke-width="12"
+                                    stroke-linecap="round" stroke-dasharray="534" stroke-dashoffset="534"
+                                    id="health-ring-progress" transform="rotate(-90 100 100)"/>
+                                <defs>
+                                    <linearGradient id="healthGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#6366f1"/>
+                                        <stop offset="100%" stop-color="#10b981"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div class="health-score-text">
+                                <span class="health-score-num" id="health-score">0</span>
+                                <span class="health-score-label" id="health-status">—</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kpi-grid">
+                        <div class="kpi-card glass-card" id="kpi-income">
+                            <div class="kpi-icon kpi-icon-income">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 7l-5-5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="kpi-info">
+                                <span class="kpi-label">Total Income</span>
+                                <span class="kpi-value" id="kpi-income-val">—</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card glass-card" id="kpi-expense">
+                            <div class="kpi-icon kpi-icon-expense">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 22V2M7 17l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="kpi-info">
+                                <span class="kpi-label">Total Expense</span>
+                                <span class="kpi-value" id="kpi-expense-val">—</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card glass-card" id="kpi-cashflow">
+                            <div class="kpi-icon kpi-icon-cashflow">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M23 6l-9.5 9.5-5-5L1 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 6h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="kpi-info">
+                                <span class="kpi-label">Net Cashflow</span>
+                                <span class="kpi-value" id="kpi-cashflow-val">—</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card glass-card" id="kpi-txns">
+                            <div class="kpi-icon kpi-icon-txns">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            </div>
+                            <div class="kpi-info">
+                                <span class="kpi-label">Transactions</span>
+                                <span class="kpi-value" id="kpi-txns-val">—</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Charts -->
+                <div class="charts-row">
+                    <div class="chart-card glass-card">
+                        <h3 class="section-title">Spending by Category</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="category-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3 class="section-title">Monthly Cashflow</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="monthly-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3: Intelligence Cards -->
+                <div class="intel-row">
+                    <div class="intel-card glass-card">
+                        <h3 class="section-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 16v-4M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            Insights
+                        </h3>
+                        <div id="insights-list" class="intel-list"></div>
+                    </div>
+                    <div class="intel-card glass-card">
+                        <h3 class="section-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="currentColor" stroke-width="1.5"/><path d="M12 9v4M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            Risks
+                        </h3>
+                        <div id="risks-list" class="intel-list"></div>
+                    </div>
+                    <div class="intel-card glass-card">
+                        <h3 class="section-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor" stroke-width="1.5"/></svg>
+                            Recommendations
+                        </h3>
+                        <div id="recommendations-list" class="intel-list"></div>
+                    </div>
+                </div>
+
+                <!-- Row 4: Transactions Table -->
+                <div class="txn-section glass-card">
+                    <div class="txn-header">
+                        <h3 class="section-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg>
+                            Transactions
+                        </h3>
+                        <div class="txn-controls">
+                            <div class="search-wrapper">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                <input type="text" id="txn-search" placeholder="Search transactions...">
+                            </div>
+                            <select id="txn-type-filter">
+                                <option value="all">All Types</option>
+                                <option value="CREDIT">Credit</option>
+                                <option value="DEBIT">Debit</option>
+                            </select>
+                            <select id="txn-category-filter">
+                                <option value="all">All Categories</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="txn-table-wrapper">
+                        <table id="txn-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Party</th>
+                                    <th>Category</th>
+                                    <th>Mode</th>
+                                    <th class="align-right">Amount</th>
+                                    <th class="align-right">Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="txn-tbody"></tbody>
+                        </table>
+                    </div>
+                    <div class="txn-pagination" id="txn-pagination"></div>
+                </div>
+
+            </main>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- CHAT PANEL (slide-out)                       -->
+        <!-- ============================================ -->
+        <aside id="chat-panel" class="chat-panel">
+            <div class="chat-header">
+                <div class="chat-header-left">
+                    <div class="chat-avatar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 017 7c0 3-2 5.5-4 7l-3 4-3-4c-2-1.5-4-4-4-7a7 7 0 017-7z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
+                    </div>
+                    <div>
+                        <h3>Financial Advisor AI</h3>
+                        <span class="chat-status">Powered by RAG</span>
+                    </div>
+                </div>
+                <button id="chat-close" class="chat-close-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="chat-welcome">
+                    <div class="chat-welcome-icon">🤖</div>
+                    <p>Hi! I'm your AI financial advisor. Ask me anything about your bank statement — spending patterns, savings tips, or specific transactions.</p>
+                    <div class="chat-suggestions">
+                        <button class="chat-suggestion" data-q="What are my top spending categories?">Top spending categories</button>
+                        <button class="chat-suggestion" data-q="How can I improve my savings?">Savings tips</button>
+                        <button class="chat-suggestion" data-q="Do I have any recurring payments?">Recurring payments</button>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <div class="chat-input-wrapper">
+                    <input type="text" id="chat-input" placeholder="Ask about your finances..." autocomplete="off">
+                    <button id="chat-send" class="chat-send-btn" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Chat overlay -->
+        <div id="chat-overlay" class="chat-overlay"></div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
