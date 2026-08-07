@@ -1,3 +1,5 @@
+import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Calendar,
   ChevronRight,
@@ -6,33 +8,48 @@ import {
   Search,
 } from "lucide-react";
 
-import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
-const statements = [
-  {
-    bank: "HDFC Bank",
-    period: "January 2026",
-    transactions: 154,
-  },
-  {
-    bank: "ICICI Bank",
-    period: "December 2025",
-    transactions: 138,
-  },
-  {
-    bank: "SBI",
-    period: "November 2025",
-    transactions: 176,
-  },
-  {
-    bank: "Axis Bank",
-    period: "October 2025",
-    transactions: 120,
-  },
-];
+import { useStatements } from "@/hooks/useStatements";
+import { useCurrentStatement } from "@/context/CurrentStatementContext";
 
 export default function Statements() {
+  const navigate = useNavigate();
+
+  const { setStatementId } = useCurrentStatement();
+
+  const { data: statements = [], isLoading, isError } = useStatements();
+
+  const [search, setSearch] = useState("");
+
+  const filteredStatements = useMemo(() => {
+    const q = search.toLowerCase();
+
+    return statements.filter((statement) => {
+      return (
+        statement.bank.toLowerCase().includes(q) ||
+        statement.original_filename.toLowerCase().includes(q)
+      );
+    });
+  }, [search, statements]);
+
+  if (isLoading) {
+    return (
+      <main className="flex-1 flex items-center justify-center bg-[#09090B] text-white">
+        Loading statements...
+      </main>
+    );
+  }
+
+  if (isError) {
+    return (
+      <main className="flex-1 flex items-center justify-center bg-[#09090B] text-red-400">
+        Failed to load statements.
+      </main>
+    );
+  }
+
   return (
     <main className="flex-1 bg-[#09090B] p-10">
 
@@ -44,7 +61,7 @@ export default function Statements() {
           </h1>
 
           <p className="mt-2 text-zinc-400">
-            Browse and manage analyzed bank statements.
+            Browse previously analyzed statements.
           </p>
         </div>
 
@@ -58,59 +75,80 @@ export default function Statements() {
           <Input
             className="pl-11"
             placeholder="Search..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
         </div>
 
       </div>
 
-      <div className="mt-8 space-y-5">
+      {filteredStatements.length === 0 ? (
+        <div className="mt-16 text-center text-zinc-400">
+          No analyzed statements found.
+        </div>
+      ) : (
+        <div className="mt-8 space-y-5">
 
-        {statements.map((statement) => (
-          <Card
-            key={statement.period}
-            className="group rounded-3xl border-white/10 bg-[#111113] p-6 transition hover:border-cyan-500/20 hover:bg-[#151517]"
-          >
-            <div className="flex items-center justify-between">
+          {filteredStatements.map((statement) => (
+            <Card
+              key={statement.statement_id}
+              onClick={() => {
+                setStatementId(statement.statement_id);
+                navigate(`/analysis/${statement.statement_id}`);
+              }}
+              className="group cursor-pointer rounded-3xl border-white/10 bg-[#111113] p-6 transition hover:border-cyan-500/30 hover:bg-[#151517]"
+            >
 
-              <div className="flex items-center gap-5">
+              <div className="flex items-center justify-between">
 
-                <div className="rounded-2xl bg-cyan-500/10 p-4">
-                  <Landmark className="text-cyan-400" />
-                </div>
+                <div className="flex items-center gap-5">
 
-                <div>
+                  <div className="rounded-2xl bg-cyan-500/10 p-4">
+                    <Landmark className="text-cyan-400" />
+                  </div>
 
-                  <h2 className="text-xl font-semibold text-white">
-                    {statement.bank}
-                  </h2>
+                  <div>
 
-                  <div className="mt-2 flex gap-6 text-sm text-zinc-400">
+                    <h2 className="text-xl font-semibold text-white">
+                      {statement.bank.replace("BankName.", "")}
+                    </h2>
 
-                    <div className="flex items-center gap-2">
-                      <Calendar size={16} />
-                      {statement.period}
-                    </div>
+                    <p className="mt-1 text-sm text-zinc-500">
+                      {statement.original_filename}
+                    </p>
 
-                    <div className="flex items-center gap-2">
-                      <FileText size={16} />
-                      {statement.transactions} Transactions
+                    <div className="mt-3 flex gap-6 text-sm text-zinc-400">
+
+                      <div className="flex items-center gap-2">
+                        <Calendar size={16} />
+                        {new Date(
+                          statement.analysis_completed
+                        ).toLocaleDateString()}
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <FileText size={16} />
+                        {statement.transaction_count} Transactions
+                      </div>
+
                     </div>
 
                   </div>
 
                 </div>
 
+                <ChevronRight className="text-zinc-500 transition group-hover:translate-x-1 group-hover:text-cyan-400" />
+
               </div>
 
-              <ChevronRight className="text-zinc-500 transition group-hover:translate-x-1 group-hover:text-cyan-400" />
+            </Card>
+          ))}
 
-            </div>
-          </Card>
-        ))}
-
-      </div>
+        </div>
+      )}
 
     </main>
   );
 }
+

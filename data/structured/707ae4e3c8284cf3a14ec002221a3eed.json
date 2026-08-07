@@ -1,6 +1,6 @@
 {
     "report_id": "",
-    "created_at": "2026-07-25T15:51:39.375292",
+    "created_at": "2026-08-07T06:31:15.644460",
     "version": "2.0",
     "account": {
         "account_holder": "Mr. Adarsh Bind",
@@ -22,7 +22,7 @@
     },
     "transactions": [
         {
-            "transaction_id": "5bb2e493-84c9-48df-8c74-42f965658549",
+            "transaction_id": "783b331b-5644-491c-b6dd-e2705f1daeb4",
             "date": "2026-06-01T00:00:00",
             "description": "UPI/DR/615286927333/Lakshmi /AIRP/o111172582/Payme",
             "party": "Lakshmi",
@@ -42,7 +42,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "6d50870d-b6e5-4d8d-90ec-f560dbab2daa",
+            "transaction_id": "3bf90d82-d8ee-4320-90de-edbef1d4b864",
             "date": "2026-06-02T00:00:00",
             "description": "UPI/DR/786546597680/REETA DEVI/PUNB/8009834334/Pay",
             "party": "REETA DEVI",
@@ -62,7 +62,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "007f5c25-80f7-4aa9-b0de-9386791fd2f9",
+            "transaction_id": "07060cb6-a24a-40ca-bc48-03ca2fa57d0a",
             "date": "2026-06-02T00:00:00",
             "description": "UPI/DR/615394275639/Abhishek/NSPB/9936717425/Paid",
             "party": "Abhishek",
@@ -82,7 +82,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "bb49fc7e-3c57-4dac-a28a-0e02df67e3e0",
+            "transaction_id": "dcfbb915-6e61-47cb-93f5-dbedb8c253e9",
             "date": "2026-06-03T00:00:00",
             "description": "UPI/DR/615499524657/Shyam La/YESB/paytm.s25v/Paid",
             "party": "Shyam La",
@@ -102,7 +102,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "b69fd950-50ec-473e-93c5-5569ab678be2",
+            "transaction_id": "39e510c5-2b44-4af2-86d7-38fe4c37d006",
             "date": "2026-06-04T00:00:00",
             "description": "UPI/DR/675154515921/PRATIMA /SBIN/8574655936/Payme",
             "party": "PRATIMA",
@@ -122,7 +122,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "4a63c2b6-890d-44be-8641-4e253d28635f",
+            "transaction_id": "5ec4d2ce-f9d1-4405-9aa2-06459c8fc5f5",
             "date": "2026-06-06T00:00:00",
             "description": "UPI/DR/615727079417/KASHISH/IPOS/8887857278/Paid v",
             "party": "KASHISH",
@@ -142,7 +142,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "9fe3951d-1030-4e97-b9fa-0b861a2ae218",
+            "transaction_id": "732d2a5c-76af-405a-9e1d-036cf414d8de",
             "date": "2026-06-09T00:00:00",
             "description": "UPI/DR/103450104389/MUTUAL F/HDFC/groww.iccl/India",
             "party": "MUTUAL F",
@@ -162,7 +162,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "0462a3b3-b86c-48ed-a917-27924cd7d4ff",
+            "transaction_id": "cc41af98-9cb0-49ee-8f88-3565d0e9ffa4",
             "date": "2026-06-10T00:00:00",
             "description": "UPI/DR/616171045756/Yogendra/BARB/q437265750/Paid",
             "party": "Yogendra",
@@ -182,7 +182,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "e03ec86c-62db-4cd9-adfe-574ffd8fecad",
+            "transaction_id": "9258e96b-3648-4f30-9972-3b7e6f8d113f",
             "date": "2026-06-10T00:00:00",
             "description": "UPI/DR/616171090557/Amit Pra/YESB/paytm.s1ji/Paid",
             "party": "Amit Pra",
@@ -202,7 +202,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "fdc1a48b-6a25-467d-ac1e-645629ece22f",
+            "transaction_id": "0da8a908-ede1-49d4-a430-e2faddb3b33d",
             "date": "2026-06-11T00:00:00",
             "description": "UPI/DR/616275649170/Mr Akash/IDIB/akashyadav/Paid",
             "party": "Mr Akash",
@@ -222,7 +222,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "1c3c0cda-c506-4175-9066-8572e39ca1e4",
+            "transaction_id": "fea77bfe-395c-4704-9ec6-b5dc7ee56625",
             "date": "2026-06-11T00:00:00",
             "description": "UPI/DR/616277413749/FINZOOM /INDB/FINZOOMINV/UPIIn",
             "party": "FINZOOM",
@@ -242,7 +242,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "0b08b32b-30af-4306-a98f-56ba584319e0",
+            "transaction_id": "5dddf4b8-4b3d-4088-9d78-ab6ba86de2c6",
             "date": "2026-06-16T00:00:00",
             "description": "UPI/CR/214626293608/GEETA DEVI/PUNB/8381829661/Pay",
             "party": "GEETA DEVI",
@@ -262,7 +262,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "ac54192e-a80a-4700-be8c-34eef8b17f73",
+            "transaction_id": "f0ad89e5-45f1-4e29-8282-7c84d4ca1a3b",
             "date": "2026-06-20T00:00:00",
             "description": "UPI/CR/070895215839/RAMBABU /PUNB/udevi0022@/Payme",
             "party": "RAMBABU",
@@ -282,7 +282,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "0e8774e1-4c85-470a-961a-b8b0ac66e6fc",
+            "transaction_id": "807315eb-3778-4bda-aa17-ff6f1dad98a8",
             "date": "2026-06-20T00:00:00",
             "description": "UPI/DR/077824116158/Mr USHA /IDIB/9936129539/Payme",
             "party": "Mr USHA",
@@ -302,7 +302,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "4b666124-bb28-4394-8779-edf4fa9d125e",
+            "transaction_id": "362d7cb1-1958-4a4f-b01d-b62faf0a4e22",
             "date": "2026-06-20T00:00:00",
             "description": "UPI/DR/340673861998/Yogendra/BARB/Q437265750/Payme",
             "party": "Yogendra",
@@ -322,7 +322,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "bb2a9718-64b6-43e1-ba90-6253153cd6b0",
+            "transaction_id": "22cd562e-a4f6-4f32-845d-405a95b14dbb",
             "date": "2026-06-20T00:00:00",
             "description": "UPI/CR/294031012296/REETA DEVI/PUNB/8009834334/Pay",
             "party": "REETA DEVI",
@@ -342,7 +342,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "af9238d0-673d-4a1e-abfb-b4328da856ee",
+            "transaction_id": "880d454f-ab7c-43ac-af0d-9a1eed4baaa6",
             "date": "2026-06-20T00:00:00",
             "description": "UPI/DR/494941851607/Sunita/YESB/BHARATPE09/Pay To",
             "party": "Sunita",
@@ -362,7 +362,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "9268a0e4-334c-4d42-a818-8c80d4af10e9",
+            "transaction_id": "51669015-ef18-4033-899f-6841060a17d2",
             "date": "2026-06-20T00:00:00",
             "description": "UPI/CR/493218799733/REETA DEVI/PUNB/8009834334/Pay",
             "party": "REETA DEVI",
@@ -382,7 +382,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "75f5dabf-d90b-42fc-a057-79d00f1b525e",
+            "transaction_id": "be8c720f-bad1-4b6a-bceb-35f14d570758",
             "date": "2026-06-20T00:00:00",
             "description": "UPI/DR/201047967671/Amit Pra/YESB/paytm.s1ji/NO RE",
             "party": "Amit Pra",
@@ -402,7 +402,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "e8c5716b-4de6-43ba-85a4-7a7d2f063f1b",
+            "transaction_id": "9dfd1a84-1ce1-40e7-a925-e3075cab95e0",
             "date": "2026-06-21T00:00:00",
             "description": "UPI/DR/065601754626/ADARSH B/PUNB/8423356323/Payme",
             "party": "ADARSH B",
@@ -422,7 +422,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "48b429b9-b935-4b11-b3c0-8a1b3dbe562e",
+            "transaction_id": "f8f1252e-dc73-4f61-8443-7717b8e7fff3",
             "date": "2026-06-25T00:00:00",
             "description": "INTEREST CREDIT",
             "party": "",
@@ -442,7 +442,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "6ce98ef6-1bb4-40f7-9bbb-a0f2c1d0d4a3",
+            "transaction_id": "e03229e5-d073-475e-833f-5ed7cfc033f0",
             "date": "2026-06-26T00:00:00",
             "description": "UPI/DR/572633233011/95552103/AIRP/9555210373/Payme",
             "party": "95552103",
@@ -462,7 +462,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "e197ee9b-2bfb-4d27-a57f-4fed38af8255",
+            "transaction_id": "a450895b-d6f8-4100-854f-1ed4cc8c2ada",
             "date": "2026-06-28T00:00:00",
             "description": "UPI/CR/617917041260/MEESHO T/YESB/mtpl1@yesb/CT223",
             "party": "MEESHO T",
@@ -482,7 +482,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "a858970e-8ba6-4672-bfcd-9ab9bf4fc21e",
+            "transaction_id": "d76a67be-5304-4619-b977-6778cb2d86fd",
             "date": "2026-06-29T00:00:00",
             "description": "UPI/CR/103554164048/NPCI BHIM/HDFC/bhimcashba/BHIM",
             "party": "NPCI BHIM",
@@ -502,7 +502,7 @@
             "metadata": {}
         },
         {
-            "transaction_id": "2086b033-bc46-4c3c-9c2d-2e3a6e4d71f7",
+            "transaction_id": "2b974bb8-f4d5-4c51-882c-283569f92af6",
             "date": "2026-06-30T00:00:00",
             "description": "UPI/DR/213043659591/RAJESH K/IPOS/9936075171/NO RE",
             "party": "RAJESH K",
@@ -522,23 +522,448 @@
             "metadata": {}
         }
     ],
-    "kpis": {},
-    "category_analysis": {},
-    "merchant_statistics": {},
-    "cashflow_analysis": {},
-    "monthly_summary": {},
-    "behavioural_insights": {},
-    "recurring_transactions": [],
+    "kpis": {
+        "income": 11016.0,
+        "expense": 11719.0,
+        "net_cash_flow": -703.0,
+        "average_credit": 1573.7142857142858,
+        "average_debit": 651.0555555555555
+    },
+    "category_analysis": {
+        "income": {
+            "UPI": 10911.0,
+            "Interest": 105.0
+        },
+        "spending": {
+            "UPI": 11369.0,
+            "Wallet": 160.0,
+            "Investment": 100.0,
+            "Merchant Payment": 90.0
+        }
+    },
+    "merchant_statistics": {
+        "ADARSH B": {
+            "transaction_count": 1,
+            "total_spent": 10000.0,
+            "average_transaction": 10000.0
+        },
+        "Mr Akash": {
+            "transaction_count": 1,
+            "total_spent": 750.0,
+            "average_transaction": 750.0
+        },
+        "Yogendra": {
+            "transaction_count": 2,
+            "total_spent": 215.0,
+            "average_transaction": 107.5
+        },
+        "FINZOOM": {
+            "transaction_count": 1,
+            "total_spent": 187.0,
+            "average_transaction": 187.0
+        },
+        "Amit Pra": {
+            "transaction_count": 2,
+            "total_spent": 140.0,
+            "average_transaction": 70.0
+        },
+        "95552103": {
+            "transaction_count": 1,
+            "total_spent": 100.0,
+            "average_transaction": 100.0
+        },
+        "MUTUAL F": {
+            "transaction_count": 1,
+            "total_spent": 100.0,
+            "average_transaction": 100.0
+        },
+        "Sunita": {
+            "transaction_count": 1,
+            "total_spent": 90.0,
+            "average_transaction": 90.0
+        },
+        "REETA DEVI": {
+            "transaction_count": 1,
+            "total_spent": 50.0,
+            "average_transaction": 50.0
+        },
+        "RAJESH K": {
+            "transaction_count": 1,
+            "total_spent": 25.0,
+            "average_transaction": 25.0
+        },
+        "Abhishek": {
+            "transaction_count": 1,
+            "total_spent": 20.0,
+            "average_transaction": 20.0
+        },
+        "Shyam La": {
+            "transaction_count": 1,
+            "total_spent": 20.0,
+            "average_transaction": 20.0
+        },
+        "Lakshmi": {
+            "transaction_count": 1,
+            "total_spent": 10.0,
+            "average_transaction": 10.0
+        },
+        "KASHISH": {
+            "transaction_count": 1,
+            "total_spent": 10.0,
+            "average_transaction": 10.0
+        },
+        "PRATIMA": {
+            "transaction_count": 1,
+            "total_spent": 1.0,
+            "average_transaction": 1.0
+        },
+        "Mr USHA": {
+            "transaction_count": 1,
+            "total_spent": 1.0,
+            "average_transaction": 1.0
+        }
+    },
+    "cashflow_analysis": {
+        "daily_spending": {
+            "2026-06-01": 10.0,
+            "2026-06-02": 70.0,
+            "2026-06-03": 20.0,
+            "2026-06-04": 1.0,
+            "2026-06-06": 10.0,
+            "2026-06-09": 100.0,
+            "2026-06-10": 55.0,
+            "2026-06-11": 937.0,
+            "2026-06-20": 391.0,
+            "2026-06-21": 10000.0,
+            "2026-06-26": 100.0,
+            "2026-06-30": 25.0
+        },
+        "cash_flow": [
+            {
+                "date": "2026-06-01",
+                "balance": 2958.88,
+                "change": 0
+            },
+            {
+                "date": "2026-06-02",
+                "balance": 2908.88,
+                "change": -50.0
+            },
+            {
+                "date": "2026-06-02",
+                "balance": 2888.88,
+                "change": -20.0
+            },
+            {
+                "date": "2026-06-03",
+                "balance": 2868.88,
+                "change": -20.0
+            },
+            {
+                "date": "2026-06-04",
+                "balance": 2867.88,
+                "change": -1.0
+            },
+            {
+                "date": "2026-06-06",
+                "balance": 2857.88,
+                "change": -10.0
+            },
+            {
+                "date": "2026-06-09",
+                "balance": 2757.88,
+                "change": -100.0
+            },
+            {
+                "date": "2026-06-10",
+                "balance": 2742.88,
+                "change": -15.0
+            },
+            {
+                "date": "2026-06-10",
+                "balance": 2702.88,
+                "change": -40.0
+            },
+            {
+                "date": "2026-06-11",
+                "balance": 1952.88,
+                "change": -750.0
+            },
+            {
+                "date": "2026-06-11",
+                "balance": 1765.88,
+                "change": -187.0
+            },
+            {
+                "date": "2026-06-16",
+                "balance": 1865.88,
+                "change": 100.0
+            },
+            {
+                "date": "2026-06-20",
+                "balance": 11874.88,
+                "change": 10009.0
+            },
+            {
+                "date": "2026-06-20",
+                "balance": 11974.88,
+                "change": 100.0
+            },
+            {
+                "date": "2026-06-20",
+                "balance": 11874.88,
+                "change": -100.0
+            },
+            {
+                "date": "2026-06-20",
+                "balance": 11865.88,
+                "change": -9.0
+            },
+            {
+                "date": "2026-06-20",
+                "balance": 11664.88,
+                "change": -201.0
+            },
+            {
+                "date": "2026-06-20",
+                "balance": 11864.88,
+                "change": 200.0
+            },
+            {
+                "date": "2026-06-20",
+                "balance": 11964.88,
+                "change": 100.0
+            },
+            {
+                "date": "2026-06-21",
+                "balance": 1874.88,
+                "change": -10090.0
+            },
+            {
+                "date": "2026-06-25",
+                "balance": 1979.88,
+                "change": 105.0
+            },
+            {
+                "date": "2026-06-26",
+                "balance": 1879.88,
+                "change": -100.0
+            },
+            {
+                "date": "2026-06-28",
+                "balance": 2286.88,
+                "change": 407.0
+            },
+            {
+                "date": "2026-06-29",
+                "balance": 2290.88,
+                "change": 4.0
+            },
+            {
+                "date": "2026-06-30",
+                "balance": 2265.88,
+                "change": -25.0
+            }
+        ]
+    },
+    "monthly_summary": {
+        "2026-06": {
+            "income": 11016.0,
+            "expense": 11719.0,
+            "savings": -703.0
+        }
+    },
+    "behavioural_insights": {
+        "highest_spending_day": "Sunday",
+        "average_daily_spending": 976.5833333333334,
+        "largest_purchase": 10000.0,
+        "most_used_category": "UPI"
+    },
+    "recurring_transactions": [
+        {
+            "party": "REETA DEVI",
+            "count": 3,
+            "average_amount": 150.0
+        }
+    ],
     "anomaly_detection": {},
-    "insights": [],
-    "risks": [],
-    "recommendations": [],
-    "financial_health_score": 0.0,
-    "financial_health_status": "",
+    "insights": {
+        "spending_insights": [
+            "You spent ₹11,719.00 during the statement period.",
+            "You saved ₹-703.00 (-6.4% of your income).",
+            "Average debit transaction was ₹651.06.",
+            "Largest expense was ₹10,000.00 to ADARSH B, accounting for 85.3% of total spending."
+        ],
+        "category_insights": [
+            "Highest spending category is 'UPI'.",
+            "UPI contributed ₹11,369.00 (97.0%) of total expenses.",
+            "Wallet contributed ₹160.00 (1.4%) of total expenses.",
+            "Investment contributed ₹100.00 (0.9%) of total expenses.",
+            "Merchant Payment contributed ₹90.00 (0.8%) of total expenses."
+        ],
+        "merchant_insights": [
+            "Most spending was with ADARSH B (₹10,000.00 across 1 transactions).",
+            "ADARSH B: 1 transactions, average ₹10,000.00.",
+            "Mr Akash: 1 transactions, average ₹750.00.",
+            "Yogendra: 2 transactions, average ₹107.50.",
+            "FINZOOM: 1 transactions, average ₹187.00.",
+            "Amit Pra: 2 transactions, average ₹70.00."
+        ],
+        "cashflow_insights": [
+            "Negative cash flow of ₹703.00.",
+            "Expenses are 106.4% of income."
+        ],
+        "behaviour_insights": [
+            "Highest spending usually occurs on Sunday.",
+            "Most frequently used category is UPI.",
+            "Average daily spending is ₹976.58."
+        ],
+        "monthly_insights": [
+            "2026-06: Income ₹11,016.00, Expense ₹11,719.00, Savings ₹-703.00."
+        ],
+        "risk_insights": [
+            "Unusually large expense detected."
+        ]
+    },
+    "risks": [
+        {
+            "risk_id": "R001",
+            "severity": "HIGH",
+            "title": "Overspending",
+            "description": "Expenses exceeded income by ₹703.00.",
+            "recommendation": "Reduce discretionary spending or increase monthly savings."
+        },
+        {
+            "risk_id": "R002",
+            "severity": "MEDIUM",
+            "title": "Large Transaction",
+            "description": "Detected an unusually large debit of ₹10,000.00.",
+            "recommendation": "Verify this transaction if it was unexpected."
+        },
+        {
+            "risk_id": "R003",
+            "severity": "LOW",
+            "title": "Category Concentration",
+            "description": "97.0% of expenses belong to 'UPI'.",
+            "recommendation": "Review whether this spending pattern is intentional."
+        },
+        {
+            "risk_id": "R004",
+            "severity": "MEDIUM",
+            "title": "Merchant Dependency",
+            "description": "ADARSH B accounts for 85.3% of total spending.",
+            "recommendation": "Confirm this spending is expected."
+        },
+        {
+            "risk_id": "R005",
+            "severity": "LOW",
+            "title": "Recurring Payments",
+            "description": "Recurring payments detected for REETA DEVI.",
+            "recommendation": "Check whether these subscriptions are still required."
+        },
+        {
+            "risk_id": "R006",
+            "severity": "MEDIUM",
+            "title": "Low Savings Rate",
+            "description": "Savings rate is only -6.4%.",
+            "recommendation": "Aim for a savings rate above 20% where possible."
+        }
+    ],
+    "recommendations": [
+        {
+            "priority": "HIGH",
+            "title": "Reduce Monthly Spending",
+            "reason": "Expenses exceeded income by ₹703.00.",
+            "recommended_action": "Create a monthly budget and reduce discretionary spending."
+        },
+        {
+            "priority": "HIGH",
+            "title": "Increase Savings",
+            "reason": "Savings rate is -6.4%.",
+            "recommended_action": "Aim for a positive monthly savings rate."
+        },
+        {
+            "priority": "MEDIUM",
+            "title": "Diversify Spending",
+            "reason": "97.0% of spending is in 'UPI'.",
+            "recommended_action": "Review whether this concentration is intentional."
+        },
+        {
+            "priority": "LOW",
+            "title": "Review Major Merchant",
+            "reason": "ADARSH B accounts for 85.3% of spending.",
+            "recommended_action": "Verify recurring or unusually high payments."
+        },
+        {
+            "priority": "LOW",
+            "title": "Review Recurring Payments",
+            "reason": "Recurring payments detected: REETA DEVI.",
+            "recommended_action": "Cancel subscriptions that are no longer required."
+        },
+        {
+            "priority": "MEDIUM",
+            "title": "Resolve Financial Risks",
+            "reason": "6 risk(s) detected.",
+            "recommended_action": "Review the Risk Report and address high-severity issues first."
+        }
+    ],
+    "financial_health_score": 40,
+    "financial_health_status": "Poor",
     "embeddings_generated": false,
     "vector_ids": [],
     "metadata": {
         "statement_period": "30-06-26",
-        "mode_of_operation": "SINGLE"
+        "mode_of_operation": "SINGLE",
+        "largest_credit": {
+            "transaction_id": "f0ad89e5-45f1-4e29-8282-7c84d4ca1a3b",
+            "date": "2026-06-20T00:00:00",
+            "description": "UPI/CR/070895215839/RAMBABU /PUNB/udevi0022@/Payme",
+            "party": "RAMBABU",
+            "amount": 10000.0,
+            "balance": 11865.88,
+            "transaction_type": "CREDIT",
+            "category": "UPI",
+            "payment_mode": "UPI",
+            "bank": "PNB",
+            "currency": "INR",
+            "reference_number": "070895215839",
+            "cheque_number": "-",
+            "branch": "",
+            "remarks": "",
+            "confidence": 1.0,
+            "tags": [],
+            "metadata": {},
+            "mode": "",
+            "type": "credit",
+            "month": "2026-06",
+            "weekday": "Saturday"
+        },
+        "largest_debit": {
+            "transaction_id": "9dfd1a84-1ce1-40e7-a925-e3075cab95e0",
+            "date": "2026-06-21T00:00:00",
+            "description": "UPI/DR/065601754626/ADARSH B/PUNB/8423356323/Payme",
+            "party": "ADARSH B",
+            "amount": 10000.0,
+            "balance": 1874.88,
+            "transaction_type": "DEBIT",
+            "category": "UPI",
+            "payment_mode": "UPI",
+            "bank": "PNB",
+            "currency": "INR",
+            "reference_number": "065601754626",
+            "cheque_number": "-",
+            "branch": "",
+            "remarks": "",
+            "confidence": 1.0,
+            "tags": [],
+            "metadata": {},
+            "mode": "",
+            "type": "debit",
+            "month": "2026-06",
+            "weekday": "Sunday"
+        },
+        "risk_flags": [
+            "Unusually large expense detected."
+        ]
     }
 }

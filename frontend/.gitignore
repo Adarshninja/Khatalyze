@@ -22,3 +22,67 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# -----------------------------
+# Python
+# -----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+venv/
+.venv/
+env/
+
+# -----------------------------
+# Environment Variables
+# -----------------------------
+.env
+.env.*
+!.env.example
+
+# -----------------------------
+# AI / Generated Data
+# -----------------------------
+data/decrypted/
+data/parsed/
+data/structured/
+data/vector_db/
+data/uploads/
+
+# Keep metadata if you want sample data in the repo
+# data/metadata/
+
+# -----------------------------
+# Logs
+# -----------------------------
+logs/
+*.log
+
+# -----------------------------
+# Node
+# -----------------------------
+node_modules/
+dist/
+dist-ssr/
+coverage/
+
+# -----------------------------
+# IDE
+# -----------------------------
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# -----------------------------
+# Misc
+# -----------------------------
+*.local

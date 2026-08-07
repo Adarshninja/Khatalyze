@@ -5,13 +5,14 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  { name: "Food", value: 35 },
-  { name: "Travel", value: 20 },
-  { name: "Shopping", value: 18 },
-  { name: "Bills", value: 15 },
-  { name: "Other", value: 12 },
-];
+interface CategoryItem {
+  name: string;
+  value: number;
+}
+
+interface CategoryChartProps {
+  data: CategoryItem[];
+}
 
 const COLORS = [
   "#06b6d4",
@@ -21,17 +22,16 @@ const COLORS = [
   "#6366f1",
 ];
 
-export default function CategoryChart() {
+export default function CategoryChart({
+  data,
+}: CategoryChartProps) {
   return (
     <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
       <h2 className="mb-6 text-lg font-semibold text-white">
         Category Breakdown
       </h2>
 
-      <ResponsiveContainer
-        width="100%"
-        height={320}
-      >
+      <ResponsiveContainer width="100%" height={320}>
         <PieChart>
           <Pie
             data={data}
@@ -41,7 +41,7 @@ export default function CategoryChart() {
             {data.map((_, index) => (
               <Cell
                 key={index}
-                fill={COLORS[index]}
+                fill={COLORS[index % COLORS.length]}
               />
             ))}
           </Pie>
@@ -50,4 +50,3 @@ export default function CategoryChart() {
     </div>
   );
 }
-

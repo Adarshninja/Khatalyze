@@ -7,7 +7,9 @@ Retrieval-Augmented Generation pipeline for FinSight AI.
 from __future__ import annotations
 
 from typing import Any
-
+from core.question_router import QuestionRouter, QueryType
+from core.metadata_answerer import MetadataAnswerer
+from core.analytics_answerer import AnalyticsAnswerer
 from core.embeddings import EmbeddingEngine
 from core.retriever import Retriever
 from core.vector_store import VectorStore
@@ -129,26 +131,69 @@ ANSWER
 """
 
     def ask(
-        self,
-        question: str,
-        top_k: int = 5,
+    self,
+    question: str,
+    top_k: int = 5,
     ) -> dict[str, Any]:
 
-        prompt = self.build_prompt(
+        route = QuestionRouter.classify(question)
+
+        print(f"[Router] Route -> {route.value}")
+
+    # -------------------------------
+    # Metadata Questions
+    # -------------------------------
+        if route == QueryType.METADATA:
+
+            answer = MetadataAnswerer.answer(
             question,
-            top_k,
+            self.report,
         )
+
+            return {
+            "question": question,
+            "answer": answer,
+            "route": route.value,
+            "context": None,
+        }
+
+    # -------------------------------
+    # Analytics (Coming Next)
+    # -------------------------------
+        if route == QueryType.ANALYTICS:
+
+            answer = AnalyticsAnswerer.answer(
+                question,
+                self.report
+            )
+            
+            return {
+                "question" : question,
+                "answer" : answer,
+                "route": route.value,
+                "content": None
+            }
+
+    # -------------------------------
+    # Default -> RAG
+    # -------------------------------
+
+        prompt = self.build_prompt(
+        question,
+        top_k,
+    )
 
         answer = self.llm.generate(prompt)
 
         return {
-            "question": question,
-            "answer": answer,
-            "context": self.retriever.retrieve_context(
-                question,
-                top_k,
-            ),
-        }
+        "question": question,
+        "answer": answer,
+        "route": route.value,
+        "context": self.retriever.retrieve_context(
+            question,
+            top_k,
+        ),
+    }
 
     def search(
         self,
@@ -184,10 +229,5 @@ ANSWER
         self.retriever = Retriever(
             self.store,
         )
-        
-        
-        
-        
-        
         
         

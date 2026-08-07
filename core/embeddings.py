@@ -1,8 +1,8 @@
-
 """
 core/embeddings.py
 
 Enhanced semantic chunk generator for FinSight AI.
+Compatible with RiskEngine returning dict-based risks.
 """
 
 from __future__ import annotations
@@ -10,7 +10,6 @@ from __future__ import annotations
 from collections import defaultdict
 import numpy as np
 from sentence_transformers import SentenceTransformer
-
 from models.report import FinancialReport
 
 
@@ -33,6 +32,21 @@ class EmbeddingEngine:
                 lines.append(f"• {key}: {v}")
         return "\n".join(lines)
 
+    def _risk_text(self) -> str:
+        lines = []
+        for risk in getattr(self.report, "risks", []):
+            if isinstance(risk, dict):
+                lines.append(
+                    f"""- [{risk.get('severity','')}]
+Title: {risk.get('title','')}
+Description: {risk.get('description','')}
+Recommendation: {risk.get('recommendation','')}
+"""
+                )
+            else:
+                lines.append(f"- {risk}")
+        return "\n".join(lines)
+
     def build_chunks(self):
         r = self.report
         chunks = []
@@ -40,13 +54,14 @@ class EmbeddingEngine:
         def add(section: str, text: str):
             text = str(text).strip()
             if text:
-                chunks.append({
-                    "section": section,
-                    "text": text,
-                    "length": len(text),
-                })
+                chunks.append(
+                    {
+                        "section": section,
+                        "text": text,
+                        "length": len(text),
+                    }
+                )
 
-        # Executive Summary
         add("executive_summary", f"""
 Executive Financial Summary
 
@@ -103,113 +118,115 @@ Score: {getattr(r,'financial_health_score','')}
 Status: {getattr(r,'financial_health_status','')}
 
 Risks
-{chr(10).join('- '+x for x in getattr(r,'risks',[]))}
+{self._risk_text()}
 """)
 
         if r.category_analysis.get("income"):
-            add("income_categories",
-                self._fmt_dict("Income by Category", r.category_analysis["income"]))
+            add("income_categories", self._fmt_dict("Income by Category", r.category_analysis["income"]))
 
         if r.category_analysis.get("spending"):
-            add("expense_categories",
-                self._fmt_dict("Spending by Category", r.category_analysis["spending"]))
+            add("expense_categories", self._fmt_dict("Spending by Category", r.category_analysis["spending"]))
 
         if r.behavioural_insights:
-            add("behavioural_insights",
-                self._fmt_dict("Behavioural Insights", r.behavioural_insights))
+            add("behavioural_insights", self._fmt_dict("Behavioural Insights", r.behavioural_insights))
 
         if r.cashflow_analysis:
-            add("cashflow_analysis",
-                self._fmt_dict("Cashflow Analysis", r.cashflow_analysis))
+            add("cashflow_analysis", self._fmt_dict("Cashflow Analysis", r.cashflow_analysis))
 
         if r.monthly_summary:
-            add("monthly_summary",
-                self._fmt_dict("Monthly Summary", r.monthly_summary))
+            add("monthly_summary", self._fmt_dict("Monthly Summary", r.monthly_summary))
 
         if r.merchant_statistics:
-            ranked = sorted(
-                r.merchant_statistics.items(),
-                key=lambda x: x[1].get("total_spent",0),
-                reverse=True
-            )
+            ranked = sorted(r.merchant_statistics.items(),
+                            key=lambda x: x[1].get("total_spent", 0),
+                            reverse=True)
             lines = ["Merchant Ranking"]
-            for i,(merchant,info) in enumerate(ranked,1):
-                lines.append(
-f"""
+            for i, (merchant, info) in enumerate(ranked, 1):
+                lines.append(f"""
 {i}. {merchant}
 Spent: {info.get("total_spent",0)}
 Transactions: {info.get("transaction_count",0)}
 Average: {info.get("average_transaction",0)}
 """)
-            add("merchant_ranking","\n".join(lines))
+            add("merchant_ranking", "\n".join(lines))
 
         if r.risks:
-            add("risk_summary","Financial Risks\n"+"\n".join(f"• {x}" for x in r.risks))
+            lines = ["Financial Risks"]
+            for risk in r.risks:
+                if isinstance(risk, dict):
+                    lines.append(f"""
+• {risk.get("title","")}
+Severity: {risk.get("severity","")}
+Description: {risk.get("description","")}
+Recommendation: {risk.get("recommendation","")}
+""")
+                else:
+                    lines.append(f"• {risk}")
+            add("risk_summary", "\n".join(lines))
 
         if r.recommendations:
-            lines=["Recommendations"]
+            lines = ["Recommendations"]
             for rec in r.recommendations:
-                lines.append(f"""
-Title: {rec.get('title','')}
-Reason: {rec.get('reason','')}
+                if isinstance(rec, dict):
+                    lines.append(f"""
+Title: {rec.get("title","")}
+Reason: {rec.get("reason","")}
 """)
-            add("recommendations","\n".join(lines))
+                else:
+                    lines.append(str(rec))
+            add("recommendations", "\n".join(lines))
 
-        # Category-wise transaction chunks
-        category_groups=defaultdict(list)
+        category_groups = defaultdict(list)
         for t in r.transactions:
-            cat=getattr(t,"category","")
-            if hasattr(cat,"value"):
-                cat=cat.value
+            cat = getattr(t, "category", "")
+            if hasattr(cat, "value"):
+                cat = cat.value
             category_groups[str(cat)].append(t)
 
-        for category,txns in category_groups.items():
-            lines=[f"{category} Transactions"]
+        for category, txns in category_groups.items():
+            lines = [f"{category} Transactions"]
             for t in txns:
-                ttype=getattr(t,"transaction_type",getattr(t,"type",""))
-                if hasattr(ttype,"value"):
-                    ttype=ttype.value
-                lines.append(
-f"""Date: {t.date}
+                ttype = getattr(t, "transaction_type", getattr(t, "type", ""))
+                if hasattr(ttype, "value"):
+                    ttype = ttype.value
+                lines.append(f"""Date: {t.date}
 Party: {t.party}
 Amount: {t.amount}
 Type: {ttype}
 """)
-            add(f"{category.lower().replace(' ','_')}_transactions","\n".join(lines))
+            add(f"{category.lower().replace(' ','_')}_transactions", "\n".join(lines))
 
-        # Original batches
-        batch_size=10
-        for i in range(0,len(r.transactions),batch_size):
-            lines=[f"Transactions Batch {i//batch_size+1}"]
+        batch_size = 10
+        for i in range(0, len(r.transactions), batch_size):
+            lines = [f"Transactions Batch {i//batch_size+1}"]
             for t in r.transactions[i:i+batch_size]:
-                cat=getattr(t,"category","")
-                if hasattr(cat,"value"):
-                    cat=cat.value
-                ttype=getattr(t,"transaction_type",getattr(t,"type",""))
-                if hasattr(ttype,"value"):
-                    ttype=ttype.value
-                lines.append(
-f"""Date: {t.date}
+                cat = getattr(t, "category", "")
+                if hasattr(cat, "value"):
+                    cat = cat.value
+                ttype = getattr(t, "transaction_type", getattr(t, "type", ""))
+                if hasattr(ttype, "value"):
+                    ttype = ttype.value
+                lines.append(f"""Date: {t.date}
 Party: {t.party}
 Amount: {t.amount}
 Category: {cat}
 Type: {ttype}
 """)
-            add(f"transactions_{i//batch_size+1}","\n".join(lines))
+            add(f"transactions_{i//batch_size+1}", "\n".join(lines))
 
         return chunks
 
     def generate_embeddings(self):
-        chunks=self.build_chunks()
-        texts=[c["text"] for c in chunks]
-        embeddings=self.model.encode(
+        chunks = self.build_chunks()
+        texts = [c["text"] for c in chunks]
+        embeddings = self.model.encode(
             texts,
             convert_to_numpy=True,
             normalize_embeddings=True,
             show_progress_bar=False,
         )
-        self.report.embeddings_generated=True
-        return {"chunks":chunks,"embeddings":embeddings}
+        self.report.embeddings_generated = True
+        return {"chunks": chunks, "embeddings": embeddings}
 
     @staticmethod
     def embedding_dimension():

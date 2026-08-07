@@ -37,3 +37,5 @@ async def analyze(statement_id: str):
             status_code=500,
             detail=f"Analysis failed: {str(e)}"
         )
+        
+        

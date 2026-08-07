@@ -1,4 +1,5 @@
 import { Activity, ArrowDown, ArrowUp, ShieldCheck } from "lucide-react";
+import { useParams } from "react-router-dom";
 
 import PageHeader from "@/components/common/PageHeader";
 import MetricCard from "@/components/analytics/MetricCard";
@@ -10,7 +11,8 @@ import TransactionsTable from "@/components/analytics/TransactionsTable";
 
 import { Button } from "@/components/ui/button";
 
-import { mockAnalytics } from "@/data/mockAnalytics";
+import { useReport } from "@/hooks/useReport";
+import { createReportViewModel } from "@/services/reportAdapter";
 
 const icons = [
   <Activity size={24} />,
@@ -20,6 +22,24 @@ const icons = [
 ];
 
 export default function Analysis() {
+  const { statementId } = useParams<{ statementId: string }>();
+
+  const { data: report } = useReport(statementId!);
+
+  if (!report) {
+    return (
+      <div className="flex h-[60vh] items-center justify-center">
+        <p className="text-zinc-400 text-lg">
+          Loading Financial Report...
+        </p>
+      </div>
+    );
+  }
+  
+console.log(report.insights);
+
+  const vm = createReportViewModel(report);
+
   return (
     <div className="space-y-8">
       <PageHeader
@@ -29,39 +49,39 @@ export default function Analysis() {
         <Button>Export Report</Button>
       </PageHeader>
 
+      {/* KPI Cards */}
       <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-        {mockAnalytics.metrics.map((metric, index) => (
+        {vm.metrics.map((metric, index) => (
           <MetricCard
             key={metric.title}
-            title={metric.title}
-            value={metric.value}
-            change={metric.change}
+            {...metric}
             icon={icons[index]}
           />
         ))}
       </div>
 
+      {/* Charts */}
       <div className="grid gap-6 xl:grid-cols-3">
         <div className="xl:col-span-2">
-          <SpendingChart data={mockAnalytics.spendingTrend} />
+          <SpendingChart data={vm.spendingTrend} />
         </div>
 
-        <CategoryChart data={mockAnalytics.categoryBreakdown} />
+        <CategoryChart data={vm.categoryBreakdown} />
       </div>
 
+      {/* AI */}
       <div className="grid gap-6 lg:grid-cols-2">
-        <AIInsights insights={mockAnalytics.insights} />
+        <AIInsights insights={vm.insights} />
 
         <Recommendations
-          recommendations={mockAnalytics.recommendations}
+          recommendations={vm.recommendations}
         />
       </div>
 
+      {/* Transactions */}
       <TransactionsTable
-        transactions={mockAnalytics.transactions}
+        transactions={vm.transactions}
       />
     </div>
   );
 }
-
-

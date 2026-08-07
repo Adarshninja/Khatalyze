@@ -1,22 +1,19 @@
-const transactions = [
-  {
-    merchant: "Amazon",
-    category: "Shopping",
-    amount: "-$120",
-  },
-  {
-    merchant: "Starbucks",
-    category: "Food",
-    amount: "-$18",
-  },
-  {
-    merchant: "Salary",
-    category: "Income",
-    amount: "+$3,200",
-  },
-];
+interface Transaction {
+  id: string;
+  merchant: string;
+  category: string;
+  amount: number;
+  date: string;
+  type: "DEBIT" | "CREDIT";
+}
 
-export default function TransactionsTable() {
+interface TransactionsTableProps {
+  transactions: Transaction[];
+}
+
+export default function TransactionsTable({
+  transactions,
+}: TransactionsTableProps) {
   return (
     <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
       <h2 className="mb-6 text-lg font-semibold text-white">
@@ -26,7 +23,7 @@ export default function TransactionsTable() {
       <div className="space-y-4">
         {transactions.map((item) => (
           <div
-            key={`${item.merchant}-${item.amount}`}
+            key={item.id}
             className="flex items-center justify-between rounded-xl bg-zinc-800/40 p-4"
           >
             <div>
@@ -39,8 +36,14 @@ export default function TransactionsTable() {
               </p>
             </div>
 
-            <span className="font-semibold text-white">
-              {item.amount}
+            <span
+              className={`font-semibold ${
+                item.type === "CREDIT"
+                  ? "text-green-400"
+                  : "text-red-400"
+              }`}
+            >
+              ₹{item.amount.toLocaleString()}
             </span>
           </div>
         ))}
@@ -48,7 +51,3 @@ export default function TransactionsTable() {
     </div>
   );
 }
-
-
-
-

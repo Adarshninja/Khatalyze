@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
+
+from models.report import FinancialReport
 
 from app.services.upload_service import load_metadata
 
@@ -11,7 +14,6 @@ from core.llm import LLMClient
 class ChatService:
 
     def __init__(self):
-
         self.llm = LLMClient()
 
     def chat(
@@ -35,23 +37,30 @@ class ChatService:
                 f"Vector database does not exist: {vector_db}"
             )
 
+        # Load FinancialReport
+        structured_path = metadata["files"]["structured"]
+
+        if not Path(structured_path).exists():
+            raise FileNotFoundError(
+                f"Structured report not found: {structured_path}"
+            )
+
+        with open(structured_path, "r", encoding="utf-8") as f:
+            report_data = json.load(f)
+
+        report = FinancialReport.from_dict(report_data)
+
+        # Create RAG
         rag = FinancialRAG(
-            report=None,
+            report=report,
             llm=self.llm,
             vector_db_path=vector_db,
         )
 
-        # return rag.ask(
-        #     question=question,
-        #     top_k=top_k,
-        # )
-        
+        # Ask question
         response = rag.ask(
             question=question,
-            top_k=top_k
+            top_k=top_k,
         )
-        
-        import pprint
-        pprint.pp(response)
-        
+
         return response

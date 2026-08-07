@@ -1,22 +1,18 @@
 from __future__ import annotations
-
+import json
+import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 
 from core.parser import StatementParser
 from core.statement_parser import StatementParser as FinancialStatementParser
-
 from core.analytics import AnalyticsEngine
 from core.insights import InsightEngine
 from core.risk_engine import RiskEngine
 from core.recommendation_engine import RecommendationEngine
 from core.embeddings import EmbeddingEngine
 from core.vector_store import VectorStore
-
-from app.services.upload_service import (
-    load_metadata,
-    update_metadata,
-)
+from app.services.upload_service import load_metadata, update_metadata
 
 
 class AnalyzeService:
@@ -26,112 +22,53 @@ class AnalyzeService:
 
     def analyze(self, statement_id: str):
 
-        ####################################################
-        # Load metadata
-        ####################################################
-
         metadata = load_metadata(statement_id)
-
         pdf_path = Path(metadata["files"]["pdf"])
 
         if not pdf_path.exists():
-            raise FileNotFoundError(
-                f"PDF not found: {pdf_path}"
-            )
-
-        ####################################################
-        # Mark analysis started
-        ####################################################
+            raise FileNotFoundError(f"PDF not found: {pdf_path}")
 
         update_metadata(
             statement_id,
             status="processing",
-            analysis_started=datetime.now(
-                timezone.utc
-            ).isoformat()
+            analysis_started=datetime.now(timezone.utc).isoformat(),
         )
 
         try:
-
-            ####################################################
-            # Step 1 : Parse PDF
-            ####################################################
-
             parsed_files = self.parser.parse(pdf_path)
-
             markdown_file = parsed_files["markdown"]
             text_file = parsed_files["text"]
 
-            ####################################################
-            # Step 2 : Markdown -> FinancialReport
-            ####################################################
-
-            statement_parser = FinancialStatementParser(
-                markdown_file
-            )
-
+            statement_parser = FinancialStatementParser(markdown_file)
             report = statement_parser.parse()
 
-            ####################################################
-            # Step 3 : Save Structured JSON
-            ####################################################
+            print(f"Transactions Parsed: {len(report.transactions)}")
 
-            structured_path = (
-                Path("data/structured")
-                / f"{statement_id}.json"
-            )
+            report = AnalyticsEngine(report).generate_report()
+            
+            print("=" * 60)
+            print("KPIs")
+            print(report.kpis)
 
-            statement_parser.save(
-                structured_path
-            )
+            print("Category")
+            print(report.category_analysis)
 
-            ####################################################
-            # Step 4 : Analytics
-            ####################################################
+            print("Cashflow")
+            print(report.cashflow_analysis)
+            print("=" * 60)
+            
+            report = InsightEngine(report).generate_report()
+            report = RiskEngine(report).analyze()
+            report = RecommendationEngine(report).generate_report()
 
-            report = AnalyticsEngine(
-                report
-            ).generate_report()
+            structured_path = Path("data/structured") / f"{statement_id}.json"
+            structured_path.parent.mkdir(parents=True, exist_ok=True)
 
-            ####################################################
-            # Step 5 : Insights
-            ####################################################
+            with open(structured_path, "w", encoding="utf-8") as f:
+                json.dump(report.to_dict(), f, indent=4, ensure_ascii=False)
 
-            report = InsightEngine(
-                report
-            ).generate_report()
-
-            ####################################################
-            # Step 6 : Risks
-            ####################################################
-
-            report = RiskEngine(
-                report
-            ).analyze()
-
-            ####################################################
-            # Step 7 : Recommendations
-            ####################################################
-
-            report = RecommendationEngine(
-                report
-            ).generate_report()
-
-            ####################################################
-            # Step 8 : Embeddings
-            ####################################################
-
-            embedding_engine = EmbeddingEngine(
-                report
-            )
-
-            embedding_result = (
-                embedding_engine.generate_embeddings()
-            )
-
-            ####################################################
-            # Step 9 : Vector Store
-            ####################################################
+            embedding_engine = EmbeddingEngine(report)
+            embedding_result = embedding_engine.generate_embeddings()
 
             vector_store = VectorStore(
                 EmbeddingEngine.embedding_dimension()
@@ -139,51 +76,34 @@ class AnalyzeService:
 
             vector_store.add_embeddings(
                 embedding_result["embeddings"],
-                embedding_result["chunks"]
-            )
-            
-            vector_db_path = (
-                Path("data/vector_db")
-                / statement_id
+                embedding_result["chunks"],
             )
 
+            vector_db_path = Path("data/vector_db") / statement_id
             vector_store.save(vector_db_path)
-
-            ####################################################
-            # Step 10 : Update Metadata
-            ####################################################
 
             update_metadata(
                 statement_id,
                 status="completed",
-                bank=str(report.account.bank)
-                if report.account.bank
-                else None,
-                analysis_completed=datetime.now(
-                    timezone.utc
-                ).isoformat(),
+                bank=str(report.account.bank) if report.account.bank else None,
+                analysis_completed=datetime.now(timezone.utc).isoformat(),
                 files={
                     "markdown": str(markdown_file),
                     "text": str(text_file),
                     "structured": str(structured_path),
                     "vector_db": str(vector_db_path),
-                }
+                },
             )
-
-            ####################################################
-            # Done
-            ####################################################
 
             return report
 
         except Exception:
+            traceback.print_exc()
 
             update_metadata(
                 statement_id,
                 status="failed",
-                analysis_completed=datetime.now(
-                    timezone.utc
-                ).isoformat()
+                analysis_completed=datetime.now(timezone.utc).isoformat(),
             )
 
             raise

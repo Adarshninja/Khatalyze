@@ -1,7 +1,23 @@
-import { ArrowUpRight, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
+import { useNavigate } from "react-router-dom";
 
-export default function Hero() {
+import type { ReportViewModel } from "@/services/reportAdapter";
+
+type HeroProps = {
+  report: ReportViewModel;
+};
+
+export default function Hero({ report }: HeroProps) {
+  const navigate = useNavigate();
+
+  const firstInsight =
+    report.insights.length > 0
+      ? report.insights[0]
+      : "Statement analyzed successfully.";
+
+  const isPositive = report.kpis.net_cash_flow >= 0;
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 25 }}
@@ -22,24 +38,31 @@ export default function Hero() {
           </div>
 
           <h1 className="text-5xl font-bold leading-tight text-white">
-            Welcome to
+            Statement
             <br />
             <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-violet-400 bg-clip-text text-transparent">
-              Khatalyse
+              Analyzed Successfully
             </span>
           </h1>
 
           <p className="mt-5 max-w-xl text-lg leading-8 text-zinc-400">
-            Turn bank statements into meaningful insights using AI-powered
-            analytics, spending intelligence, and conversational finance.
+            Your financial report has been generated successfully. Explore
+            spending insights, cash flow trends, AI recommendations, and ask
+            questions about your statement using Khatalyse AI.
           </p>
 
-          <div className="mt-8 flex gap-4">
-            <button className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 px-6 py-3 font-medium text-white transition hover:scale-105">
-              Upload Statement
+          <div className="mt-8 flex flex-wrap gap-4">
+            <button
+              onClick={() => navigate("/analysis")}
+              className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 px-6 py-3 font-medium text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/30"
+            >
+              View Analytics
             </button>
 
-            <button className="rounded-xl border border-white/10 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10">
+            <button
+              onClick={() => navigate("/chat")}
+              className="rounded-xl border border-white/10 bg-white/5 px-6 py-3 font-medium text-white transition-all hover:bg-white/10"
+            >
               AI Workspace
             </button>
           </div>
@@ -48,14 +71,24 @@ export default function Hero() {
         {/* Right */}
         <div className="flex w-full max-w-sm flex-col gap-4">
           <div className="rounded-2xl border border-white/10 bg-black/30 p-5 backdrop-blur-xl">
-            <p className="text-sm text-zinc-400">Financial Health</p>
+            <p className="text-sm text-zinc-400">Net Cash Flow</p>
 
-            <div className="mt-2 flex items-end justify-between">
-              <h2 className="text-5xl font-bold text-white">92</h2>
+            <div className="mt-3">
+              <h2 className="text-4xl font-bold text-white">
+                ₹
+                {report.kpis.net_cash_flow.toLocaleString("en-IN", {
+                  maximumFractionDigits: 2,
+                })}
+              </h2>
 
-              <div className="flex items-center gap-1 rounded-full bg-emerald-500/15 px-3 py-1 text-sm text-emerald-400">
-                <TrendingUp size={16} />
-                +12%
+              <div
+                className={`mt-3 inline-flex rounded-full px-3 py-1 text-sm ${
+                  isPositive
+                    ? "bg-emerald-500/15 text-emerald-400"
+                    : "bg-rose-500/15 text-rose-400"
+                }`}
+              >
+                {isPositive ? "Cash Surplus" : "Cash Deficit"}
               </div>
             </div>
           </div>
@@ -64,14 +97,14 @@ export default function Hero() {
             <div className="flex items-center justify-between">
               <span className="text-zinc-400">AI Summary</span>
 
-              <ArrowUpRight className="text-cyan-400" size={18} />
+              <ArrowUpRight
+                className="text-cyan-400"
+                size={18}
+              />
             </div>
 
             <p className="mt-4 leading-7 text-zinc-300">
-              Spending decreased by{" "}
-              <span className="font-semibold text-cyan-400">12%</span> this
-              month while savings increased by{" "}
-              <span className="font-semibold text-emerald-400">18%</span>.
+              {firstInsight}
             </p>
           </div>
         </div>

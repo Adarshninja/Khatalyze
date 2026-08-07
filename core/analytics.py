@@ -33,7 +33,12 @@ class AnalyticsEngine:
                 statement = json.load(f)
             self.transactions = statement.get("transactions", [])
 
+        print("="*60)
+        print("Transactions:", len(self.transactions))
+        print(self.transactions[:2])
+        print("="*60)
         self.df = pd.DataFrame(self.transactions)
+        print(self.df.columns.tolist())
         self._prepare_dataframe()
 
     def _prepare_dataframe(self):
@@ -90,9 +95,27 @@ class AnalyticsEngine:
     def average_debit(self):
         d=self._filter("debit"); return 0 if d.empty else float(d["amount"].mean())
     def largest_credit(self):
-        d=self._filter("credit"); return {} if d.empty else d.loc[d["amount"].idxmax()].to_dict()
+        d=self._filter("credit")
+        if d.empty:
+            return {}
+        row = d.loc[d["amount"].idxmax()].to_dict()
+        
+        for k, v in row.items():
+            if hasattr(v, "isoformat"):
+                row[k] = v.isoformat()
+        return row
+    
     def largest_debit(self):
-        d=self._filter("debit"); return {} if d.empty else d.loc[d["amount"].idxmax()].to_dict()
+        d=self._filter("debit")
+        
+        if d.empty:
+            return {}
+        row = d.loc[d["amount"].idxmax()].to_dict()
+        
+        for k, v in row.items():
+            if hasattr(v, "isoformat"):
+                row[k] = v.isoformat()
+        return row
 
     def spending_by_category(self):
         d=self._filter("debit")

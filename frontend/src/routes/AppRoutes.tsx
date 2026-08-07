@@ -26,7 +26,7 @@ export default function AppRoutes() {
         />
 
         <Route
-          path="/analysis"
+          path="/analysis/:statementId"
           element={<Analysis />}
         />
 

@@ -1,14 +1,9 @@
-import { Bell, Menu, Search } from "lucide-react";
+import { Bell, Search } from "lucide-react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 
-import Sidebar from "./Sidebar";
+import MobileSidebar from "./MobileSidebar";
 
 export default function Navbar() {
   return (
@@ -20,20 +15,7 @@ export default function Navbar() {
 
           {/* Mobile Menu */}
           <div className="lg:hidden">
-            <Sheet>
-              <SheetTrigger asChild>
-                <button className="rounded-lg p-2 transition hover:bg-zinc-800">
-                  <Menu className="h-5 w-5 text-white" />
-                </button>
-              </SheetTrigger>
-
-              <SheetContent
-                side="left"
-                className="w-72 border-zinc-800 bg-[#09090B] p-0"
-              >
-                <Sidebar />
-              </SheetContent>
-            </Sheet>
+              <MobileSidebar />
           </div>
 
           {/* Search */}
@@ -46,7 +28,9 @@ export default function Navbar() {
             <Input
               placeholder="Search statements..."
               className="pl-10"
-            />
+              autoComplete="off"
+             />
+
           </div>
         </div>
 
