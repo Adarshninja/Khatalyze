@@ -1,7 +1,7 @@
 """
 core/llm.py
 
-LLM wrapper for FinSight AI.
+LLM wrapper for Khatalyse AI.
 Currently supports Groq.
 """
 
@@ -22,7 +22,8 @@ class LLMClient:
 
     def __init__(
         self,
-        model: str = "llama-3.3-70b-versatile",
+        # model: str = "llama-3.3-70b-versatile",
+        model: str = "openai/gpt-oss-120b",
         temperature: float = 0.2,
     ):
         api_key = os.getenv("GROQ_API_KEY")
@@ -58,4 +59,3 @@ class LLMClient:
         )
 
         return response.choices[0].message.content.strip()
-

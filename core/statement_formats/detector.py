@@ -8,6 +8,8 @@ from __future__ import annotations
 from core.statement_formats.sbi_savings import SBISavingsParser
 from core.statement_formats.axis_credit_card import AxisCreditCardParser
 from core.statement_formats.pnb_savings import PNBSavingsParser
+from core.statement_formats.kotak_savings import KotakSavingsParser
+
 
 class StatementDetector:
 
@@ -28,14 +30,19 @@ class StatementDetector:
         if AxisCreditCardParser.matches(self.text):
             print("Detected: Axis Credit Card Statement")
             return AxisCreditCardParser(self.markdown_file)
-        
+
+        # PNB Savings Statement
         if PNBSavingsParser.matches(self.text):
             print("Detected: PNB Savings Statement")
             return PNBSavingsParser(self.markdown_file)
+
+        # Kotak Savings / Kotak 811 Statement
+        if KotakSavingsParser.matches(self.text):
+            print("Detected: Kotak Savings Statement")
+            return KotakSavingsParser(self.markdown_file)
 
         raise ValueError(
             "Unsupported statement format.\n"
             "No parser is available for this statement."
         )
-        
         

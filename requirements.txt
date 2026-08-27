@@ -1,5 +1,26 @@
-fastapi
-uvicorn
-python-multipart
-pydantic
-aiofiles
+fastapi==0.140.0
+uvicorn==0.51.0
+python-multipart==0.0.32
+pydantic==2.13.4
+pydantic-settings==2.14.2
+python-dotenv==1.2.2
+
+# PDF / document processing
+pypdf==6.14.2
+beautifulsoup4==4.15.0
+
+# Data / analytics
+numpy==2.5.1
+pandas==3.0.5
+scikit-learn==1.9.0
+
+# Embeddings / vector search
+faiss-cpu==1.14.3
+sentence-transformers==5.6.1
+
+# LlamaParse / Llama Cloud
+llama-cloud==2.11.0
+
+# LLM
+groq==1.6.0
+

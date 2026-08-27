@@ -31,7 +31,7 @@ app.include_router(statements.router)
 @app.get("/")
 def home():
     return {
-        "message": "Welcome to FinSight AI"
+        "message": "Welcome to Khatalyse"
     }
     
     

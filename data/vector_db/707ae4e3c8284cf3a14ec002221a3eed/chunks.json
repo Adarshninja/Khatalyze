@@ -1,0 +1,102 @@
+[
+  {
+    "section": "executive_summary",
+    "text": "Executive Financial Summary\n\nAccount Holder: Mr. Adarsh Bind\nBank: BankName.SBI\nAccount Number: \n\nOpening Balance: 2968.88\nClosing Balance: 2265.88\n\nTotal Income: 0\nTotal Expenses: 0\nNet Cash Flow: -703.0\n\nFinancial Health Score: 40\nFinancial Status: Poor",
+    "length": 255
+  },
+  {
+    "section": "account",
+    "text": "Account Information\n\nBank: BankName.SBI\nAccount Holder: Mr. Adarsh Bind\nAccount Number:",
+    "length": 87
+  },
+  {
+    "section": "kpis",
+    "text": "Financial KPIs\n• Income: 11016.0\n• Expense: 11719.0\n• Net Cash Flow: -703.0\n• Average Credit: 1573.7142857142858\n• Average Debit: 651.0555555555555",
+    "length": 147
+  },
+  {
+    "section": "financial_health",
+    "text": "Financial Health\n\nScore: 40\nStatus: Poor\n\nRisks\n- [HIGH]\nTitle: Overspending\nDescription: Expenses exceeded income by ₹703.00.\nRecommendation: Reduce discretionary spending or increase monthly savings.\n\n- [MEDIUM]\nTitle: Large Transaction\nDescription: Detected an unusually large debit of ₹10,000.00.\nRecommendation: Verify this transaction if it was unexpected.\n\n- [LOW]\nTitle: Category Concentration\nDescription: 97.0% of expenses belong to 'UPI'.\nRecommendation: Review whether this spending pattern is intentional.\n\n- [MEDIUM]\nTitle: Merchant Dependency\nDescription: ADARSH B accounts for 85.3% of total spending.\nRecommendation: Confirm this spending is expected.\n\n- [LOW]\nTitle: Recurring Payments\nDescription: Recurring payments detected for REETA DEVI.\nRecommendation: Check whether these subscriptions are still required.\n\n- [MEDIUM]\nTitle: Low Savings Rate\nDescription: Savings rate is only -6.4%.\nRecommendation: Aim for a savings rate above 20% where possible.",
+    "length": 972
+  },
+  {
+    "section": "income_categories",
+    "text": "Income by Category\n• Upi: 10911.0\n• Interest: 105.0",
+    "length": 51
+  },
+  {
+    "section": "expense_categories",
+    "text": "Spending by Category\n• Upi: 11369.0\n• Wallet: 160.0\n• Investment: 100.0\n• Merchant Payment: 90.0",
+    "length": 96
+  },
+  {
+    "section": "behavioural_insights",
+    "text": "Behavioural Insights\n• Highest Spending Day: Sunday\n• Average Daily Spending: 976.5833333333334\n• Largest Purchase: 10000.0\n• Most Used Category: UPI",
+    "length": 149
+  },
+  {
+    "section": "cashflow_analysis",
+    "text": "Cashflow Analysis\n\nDaily Spending:\n  • 2026-06-01: 10.0\n  • 2026-06-02: 70.0\n  • 2026-06-03: 20.0\n  • 2026-06-04: 1.0\n  • 2026-06-06: 10.0\n  • 2026-06-09: 100.0\n  • 2026-06-10: 55.0\n  • 2026-06-11: 937.0\n  • 2026-06-20: 391.0\n  • 2026-06-21: 10000.0\n  • 2026-06-26: 100.0\n  • 2026-06-30: 25.0\n• Cash Flow: [{'date': '2026-06-01', 'balance': 2958.88, 'change': 0}, {'date': '2026-06-02', 'balance': 2908.88, 'change': -50.0}, {'date': '2026-06-02', 'balance': 2888.88, 'change': -20.0}, {'date': '2026-06-03', 'balance': 2868.88, 'change': -20.0}, {'date': '2026-06-04', 'balance': 2867.88, 'change': -1.0}, {'date': '2026-06-06', 'balance': 2857.88, 'change': -10.0}, {'date': '2026-06-09', 'balance': 2757.88, 'change': -100.0}, {'date': '2026-06-10', 'balance': 2742.88, 'change': -15.0}, {'date': '2026-06-10', 'balance': 2702.88, 'change': -40.0}, {'date': '2026-06-11', 'balance': 1952.88, 'change': -750.0}, {'date': '2026-06-11', 'balance': 1765.88, 'change': -187.0}, {'date': '2026-06-16', 'balance': 1865.88, 'change': 100.0}, {'date': '2026-06-20', 'balance': 11874.88, 'change': 10009.0}, {'date': '2026-06-20', 'balance': 11974.88, 'change': 100.0}, {'date': '2026-06-20', 'balance': 11874.88, 'change': -100.0}, {'date': '2026-06-20', 'balance': 11865.88, 'change': -9.0}, {'date': '2026-06-20', 'balance': 11664.88, 'change': -201.0}, {'date': '2026-06-20', 'balance': 11864.88, 'change': 200.0}, {'date': '2026-06-20', 'balance': 11964.88, 'change': 100.0}, {'date': '2026-06-21', 'balance': 1874.88, 'change': -10090.0}, {'date': '2026-06-25', 'balance': 1979.88, 'change': 105.0}, {'date': '2026-06-26', 'balance': 1879.88, 'change': -100.0}, {'date': '2026-06-28', 'balance': 2286.88, 'change': 407.0}, {'date': '2026-06-29', 'balance': 2290.88, 'change': 4.0}, {'date': '2026-06-30', 'balance': 2265.88, 'change': -25.0}]",
+    "length": 1841
+  },
+  {
+    "section": "monthly_summary",
+    "text": "Monthly Summary\n\n2026-06:\n  • income: 11016.0\n  • expense: 11719.0\n  • savings: -703.0",
+    "length": 86
+  },
+  {
+    "section": "merchant_ranking",
+    "text": "Merchant Ranking\n\n1. ADARSH B\nSpent: 10000.0\nTransactions: 1\nAverage: 10000.0\n\n\n2. Mr Akash\nSpent: 750.0\nTransactions: 1\nAverage: 750.0\n\n\n3. Yogendra\nSpent: 215.0\nTransactions: 2\nAverage: 107.5\n\n\n4. FINZOOM\nSpent: 187.0\nTransactions: 1\nAverage: 187.0\n\n\n5. Amit Pra\nSpent: 140.0\nTransactions: 2\nAverage: 70.0\n\n\n6. 95552103\nSpent: 100.0\nTransactions: 1\nAverage: 100.0\n\n\n7. MUTUAL F\nSpent: 100.0\nTransactions: 1\nAverage: 100.0\n\n\n8. Sunita\nSpent: 90.0\nTransactions: 1\nAverage: 90.0\n\n\n9. REETA DEVI\nSpent: 50.0\nTransactions: 1\nAverage: 50.0\n\n\n10. RAJESH K\nSpent: 25.0\nTransactions: 1\nAverage: 25.0\n\n\n11. Abhishek\nSpent: 20.0\nTransactions: 1\nAverage: 20.0\n\n\n12. Shyam La\nSpent: 20.0\nTransactions: 1\nAverage: 20.0\n\n\n13. Lakshmi\nSpent: 10.0\nTransactions: 1\nAverage: 10.0\n\n\n14. KASHISH\nSpent: 10.0\nTransactions: 1\nAverage: 10.0\n\n\n15. PRATIMA\nSpent: 1.0\nTransactions: 1\nAverage: 1.0\n\n\n16. Mr USHA\nSpent: 1.0\nTransactions: 1\nAverage: 1.0",
+    "length": 926
+  },
+  {
+    "section": "risk_summary",
+    "text": "Financial Risks\n\n• Overspending\nSeverity: HIGH\nDescription: Expenses exceeded income by ₹703.00.\nRecommendation: Reduce discretionary spending or increase monthly savings.\n\n\n• Large Transaction\nSeverity: MEDIUM\nDescription: Detected an unusually large debit of ₹10,000.00.\nRecommendation: Verify this transaction if it was unexpected.\n\n\n• Category Concentration\nSeverity: LOW\nDescription: 97.0% of expenses belong to 'UPI'.\nRecommendation: Review whether this spending pattern is intentional.\n\n\n• Merchant Dependency\nSeverity: MEDIUM\nDescription: ADARSH B accounts for 85.3% of total spending.\nRecommendation: Confirm this spending is expected.\n\n\n• Recurring Payments\nSeverity: LOW\nDescription: Recurring payments detected for REETA DEVI.\nRecommendation: Check whether these subscriptions are still required.\n\n\n• Low Savings Rate\nSeverity: MEDIUM\nDescription: Savings rate is only -6.4%.\nRecommendation: Aim for a savings rate above 20% where possible.",
+    "length": 952
+  },
+  {
+    "section": "recommendations",
+    "text": "Recommendations\n\nTitle: Reduce Monthly Spending\nReason: Expenses exceeded income by ₹703.00.\n\n\nTitle: Increase Savings\nReason: Savings rate is -6.4%.\n\n\nTitle: Diversify Spending\nReason: 97.0% of spending is in 'UPI'.\n\n\nTitle: Review Major Merchant\nReason: ADARSH B accounts for 85.3% of spending.\n\n\nTitle: Review Recurring Payments\nReason: Recurring payments detected: REETA DEVI.\n\n\nTitle: Resolve Financial Risks\nReason: 6 risk(s) detected.",
+    "length": 441
+  },
+  {
+    "section": "upi_transactions",
+    "text": "UPI Transactions\nDate: 2026-06-01 00:00:00\nParty: Lakshmi\nAmount: 10.0\nType: DEBIT\n\nDate: 2026-06-02 00:00:00\nParty: REETA DEVI\nAmount: 50.0\nType: DEBIT\n\nDate: 2026-06-02 00:00:00\nParty: Abhishek\nAmount: 20.0\nType: DEBIT\n\nDate: 2026-06-04 00:00:00\nParty: PRATIMA\nAmount: 1.0\nType: DEBIT\n\nDate: 2026-06-06 00:00:00\nParty: KASHISH\nAmount: 10.0\nType: DEBIT\n\nDate: 2026-06-10 00:00:00\nParty: Yogendra\nAmount: 15.0\nType: DEBIT\n\nDate: 2026-06-11 00:00:00\nParty: Mr Akash\nAmount: 750.0\nType: DEBIT\n\nDate: 2026-06-11 00:00:00\nParty: FINZOOM\nAmount: 187.0\nType: DEBIT\n\nDate: 2026-06-16 00:00:00\nParty: GEETA DEVI\nAmount: 100.0\nType: CREDIT\n\nDate: 2026-06-20 00:00:00\nParty: RAMBABU\nAmount: 10000.0\nType: CREDIT\n\nDate: 2026-06-20 00:00:00\nParty: Mr USHA\nAmount: 1.0\nType: DEBIT\n\nDate: 2026-06-20 00:00:00\nParty: Yogendra\nAmount: 200.0\nType: DEBIT\n\nDate: 2026-06-20 00:00:00\nParty: REETA DEVI\nAmount: 300.0\nType: CREDIT\n\nDate: 2026-06-20 00:00:00\nParty: REETA DEVI\nAmount: 100.0\nType: CREDIT\n\nDate: 2026-06-21 00:00:00\nParty: ADARSH B\nAmount: 10000.0\nType: DEBIT\n\nDate: 2026-06-26 00:00:00\nParty: 95552103\nAmount: 100.0\nType: DEBIT\n\nDate: 2026-06-28 00:00:00\nParty: MEESHO T\nAmount: 407.0\nType: CREDIT\n\nDate: 2026-06-29 00:00:00\nParty: NPCI BHIM\nAmount: 4.0\nType: CREDIT\n\nDate: 2026-06-30 00:00:00\nParty: RAJESH K\nAmount: 25.0\nType: DEBIT",
+    "length": 1327
+  },
+  {
+    "section": "wallet_transactions",
+    "text": "Wallet Transactions\nDate: 2026-06-03 00:00:00\nParty: Shyam La\nAmount: 20.0\nType: DEBIT\n\nDate: 2026-06-10 00:00:00\nParty: Amit Pra\nAmount: 40.0\nType: DEBIT\n\nDate: 2026-06-20 00:00:00\nParty: Amit Pra\nAmount: 100.0\nType: DEBIT",
+    "length": 223
+  },
+  {
+    "section": "investment_transactions",
+    "text": "Investment Transactions\nDate: 2026-06-09 00:00:00\nParty: MUTUAL F\nAmount: 100.0\nType: DEBIT",
+    "length": 91
+  },
+  {
+    "section": "merchant_payment_transactions",
+    "text": "Merchant Payment Transactions\nDate: 2026-06-20 00:00:00\nParty: Sunita\nAmount: 90.0\nType: DEBIT",
+    "length": 94
+  },
+  {
+    "section": "interest_transactions",
+    "text": "Interest Transactions\nDate: 2026-06-25 00:00:00\nParty: \nAmount: 105.0\nType: CREDIT",
+    "length": 82
+  },
+  {
+    "section": "transactions_1",
+    "text": "Transactions Batch 1\nDate: 2026-06-01 00:00:00\nParty: Lakshmi\nAmount: 10.0\nCategory: UPI\nType: DEBIT\n\nDate: 2026-06-02 00:00:00\nParty: REETA DEVI\nAmount: 50.0\nCategory: UPI\nType: DEBIT\n\nDate: 2026-06-02 00:00:00\nParty: Abhishek\nAmount: 20.0\nCategory: UPI\nType: DEBIT\n\nDate: 2026-06-03 00:00:00\nParty: Shyam La\nAmount: 20.0\nCategory: Wallet\nType: DEBIT\n\nDate: 2026-06-04 00:00:00\nParty: PRATIMA\nAmount: 1.0\nCategory: UPI\nType: DEBIT\n\nDate: 2026-06-06 00:00:00\nParty: KASHISH\nAmount: 10.0\nCategory: UPI\nType: DEBIT\n\nDate: 2026-06-09 00:00:00\nParty: MUTUAL F\nAmount: 100.0\nCategory: Investment\nType: DEBIT\n\nDate: 2026-06-10 00:00:00\nParty: Yogendra\nAmount: 15.0\nCategory: UPI\nType: DEBIT\n\nDate: 2026-06-10 00:00:00\nParty: Amit Pra\nAmount: 40.0\nCategory: Wallet\nType: DEBIT\n\nDate: 2026-06-11 00:00:00\nParty: Mr Akash\nAmount: 750.0\nCategory: UPI\nType: DEBIT",
+    "length": 852
+  },
+  {
+    "section": "transactions_2",
+    "text": "Transactions Batch 2\nDate: 2026-06-11 00:00:00\nParty: FINZOOM\nAmount: 187.0\nCategory: UPI\nType: DEBIT\n\nDate: 2026-06-16 00:00:00\nParty: GEETA DEVI\nAmount: 100.0\nCategory: UPI\nType: CREDIT\n\nDate: 2026-06-20 00:00:00\nParty: RAMBABU\nAmount: 10000.0\nCategory: UPI\nType: CREDIT\n\nDate: 2026-06-20 00:00:00\nParty: Mr USHA\nAmount: 1.0\nCategory: UPI\nType: DEBIT\n\nDate: 2026-06-20 00:00:00\nParty: Yogendra\nAmount: 200.0\nCategory: UPI\nType: DEBIT\n\nDate: 2026-06-20 00:00:00\nParty: REETA DEVI\nAmount: 300.0\nCategory: UPI\nType: CREDIT\n\nDate: 2026-06-20 00:00:00\nParty: Sunita\nAmount: 90.0\nCategory: Merchant Payment\nType: DEBIT\n\nDate: 2026-06-20 00:00:00\nParty: REETA DEVI\nAmount: 100.0\nCategory: UPI\nType: CREDIT\n\nDate: 2026-06-20 00:00:00\nParty: Amit Pra\nAmount: 100.0\nCategory: Wallet\nType: DEBIT\n\nDate: 2026-06-21 00:00:00\nParty: ADARSH B\nAmount: 10000.0\nCategory: UPI\nType: DEBIT",
+    "length": 871
+  },
+  {
+    "section": "transactions_3",
+    "text": "Transactions Batch 3\nDate: 2026-06-25 00:00:00\nParty: \nAmount: 105.0\nCategory: Interest\nType: CREDIT\n\nDate: 2026-06-26 00:00:00\nParty: 95552103\nAmount: 100.0\nCategory: UPI\nType: DEBIT\n\nDate: 2026-06-28 00:00:00\nParty: MEESHO T\nAmount: 407.0\nCategory: UPI\nType: CREDIT\n\nDate: 2026-06-29 00:00:00\nParty: NPCI BHIM\nAmount: 4.0\nCategory: UPI\nType: CREDIT\n\nDate: 2026-06-30 00:00:00\nParty: RAJESH K\nAmount: 25.0\nCategory: UPI\nType: DEBIT",
+    "length": 432
+  }
+]
