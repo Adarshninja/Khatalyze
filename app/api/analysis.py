@@ -38,25 +38,20 @@
         
         
         
-        
 from fastapi import APIRouter, HTTPException, BackgroundTasks
-
-from app.services.analyze_service import AnalyzeService
-
 
 router = APIRouter(
     prefix="/analyze",
     tags=["Analysis"]
 )
 
-
-# Temporary in-memory job status.
-# Good enough for the current deployment/demo.
 analysis_jobs = {}
 
 
 def run_analysis(statement_id: str):
     try:
+        from app.services.analyze_service import AnalyzeService
+
         analysis_jobs[statement_id] = {
             "status": "processing"
         }
@@ -87,7 +82,6 @@ async def analyze(
     statement_id: str,
     background_tasks: BackgroundTasks
 ):
-
     analysis_jobs[statement_id] = {
         "status": "queued"
     }
