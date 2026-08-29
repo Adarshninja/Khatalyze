@@ -37,8 +37,9 @@
 #         )
         
         
-        
-from fastapi import APIRouter, HTTPException, BackgroundTasks
+from fastapi import APIRouter, HTTPException
+import threading
+import traceback
 
 router = APIRouter(
     prefix="/analyze",
@@ -49,12 +50,16 @@ analysis_jobs = {}
 
 
 def run_analysis(statement_id: str):
+    print(f"🔥 ANALYSIS THREAD STARTED: {statement_id}", flush=True)
+
     try:
         from app.services.analyze_service import AnalyzeService
 
         analysis_jobs[statement_id] = {
             "status": "processing"
         }
+
+        print(f"🚀 Running AnalyzeService: {statement_id}", flush=True)
 
         analyze_service = AnalyzeService()
         report = analyze_service.analyze(statement_id)
@@ -64,13 +69,20 @@ def run_analysis(statement_id: str):
             "report": report.to_dict()
         }
 
+        print(f"✅ ANALYSIS COMPLETED: {statement_id}", flush=True)
+
     except FileNotFoundError as e:
+        print(f"❌ FILE NOT FOUND: {e}", flush=True)
+
         analysis_jobs[statement_id] = {
             "status": "failed",
             "error": str(e)
         }
 
     except Exception as e:
+        print(f"❌ ANALYSIS FAILED: {e}", flush=True)
+        traceback.print_exc()
+
         analysis_jobs[statement_id] = {
             "status": "failed",
             "error": str(e)
@@ -78,18 +90,19 @@ def run_analysis(statement_id: str):
 
 
 @router.post("/{statement_id}", status_code=202)
-async def analyze(
-    statement_id: str,
-    background_tasks: BackgroundTasks
-):
+async def analyze(statement_id: str):
+
     analysis_jobs[statement_id] = {
         "status": "queued"
     }
 
-    background_tasks.add_task(
-        run_analysis,
-        statement_id
+    thread = threading.Thread(
+        target=run_analysis,
+        args=(statement_id,),
+        daemon=True
     )
+
+    thread.start()
 
     return {
         "status": "processing",
