@@ -3,15 +3,11 @@ from pydantic import BaseModel
 from fastapi import APIRouter
 from fastapi import HTTPException
 
-from app.services.chat_service import ChatService
-
 
 router = APIRouter(
     prefix="/chat",
     tags=["Chat"],
 )
-
-chat_service = ChatService()
 
 
 class ChatRequest(BaseModel):
@@ -26,6 +22,8 @@ async def chat(
 ):
 
     try:
+        from app.services.chat_service import ChatService
+        chat_service = ChatService()
 
         response = chat_service.chat(
             statement_id=statement_id,
