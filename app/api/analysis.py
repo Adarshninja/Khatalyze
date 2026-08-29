@@ -48,46 +48,66 @@ router = APIRouter(
 
 analysis_jobs = {}
 
-
 def run_analysis(statement_id: str):
-    print(f"🔥 ANALYSIS THREAD STARTED: {statement_id}", flush=True)
+    print(
+        f"🔥 ANALYSIS THREAD STARTED: {statement_id}",
+        flush=True
+    )
 
     try:
+        print(
+            "📦 Importing AnalyzeService...",
+            flush=True
+        )
+
         from app.services.analyze_service import AnalyzeService
+
+        print(
+            "✅ AnalyzeService imported successfully",
+            flush=True
+        )
 
         analysis_jobs[statement_id] = {
             "status": "processing"
         }
 
-        print(f"🚀 Running AnalyzeService: {statement_id}", flush=True)
+        print(
+            f"🚀 Running AnalyzeService: {statement_id}",
+            flush=True
+        )
 
         analyze_service = AnalyzeService()
+
+        print(
+            "✅ AnalyzeService instance created",
+            flush=True
+        )
+
         report = analyze_service.analyze(statement_id)
+
+        print(
+            "✅ AnalyzeService.analyze() completed",
+            flush=True
+        )
 
         analysis_jobs[statement_id] = {
             "status": "completed",
             "report": report.to_dict()
         }
 
-        print(f"✅ ANALYSIS COMPLETED: {statement_id}", flush=True)
-
-    except FileNotFoundError as e:
-        print(f"❌ FILE NOT FOUND: {e}", flush=True)
-
-        analysis_jobs[statement_id] = {
-            "status": "failed",
-            "error": str(e)
-        }
-
     except Exception as e:
-        print(f"❌ ANALYSIS FAILED: {e}", flush=True)
+        print(
+            f"❌ BACKGROUND ANALYSIS FAILED: {type(e).__name__}: {e}",
+            flush=True
+        )
+
         traceback.print_exc()
 
         analysis_jobs[statement_id] = {
             "status": "failed",
-            "error": str(e)
+            "error": f"{type(e).__name__}: {e}"
         }
-
+        
 
 @router.post("/{statement_id}", status_code=202)
 async def analyze(statement_id: str):
