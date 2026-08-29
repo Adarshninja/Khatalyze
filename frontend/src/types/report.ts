@@ -55,6 +55,13 @@ export interface Transaction {
   metadata: Record<string, unknown>;
 }
 
+export interface Recommendation {
+  priority: string;
+  title: string;
+  reason: string;
+  recommended_action: string;
+}
+
 export interface FinancialReport {
 
   report_id: string;
@@ -83,11 +90,19 @@ export interface FinancialReport {
 
   anomaly_detection: Record<string, any>;
 
-  insights: string[];
+  insights: {
+  spending_insights: string[];
+  category_insights: string[];
+  merchant_insights: string[];
+  cashflow_insights: string[];
+  behaviour_insights: string[];
+  monthly_insights: string[];
+  risk_insights: string[];
+};
 
   risks: any[];
 
-  recommendations: any[];
+  recommendations: Recommendation[];
 
   financial_health_score: number;
 

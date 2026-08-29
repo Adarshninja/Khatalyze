@@ -17,7 +17,7 @@ export type ReportViewModel = {
   }[];
 
   spendingTrend: {
-    date: string;
+    day: string;
     amount: number;
   }[];
 
@@ -41,8 +41,8 @@ export type ReportViewModel = {
     description: string;
     category: string;
     amount: number;
-    type: string;
-    party: string;
+    type: "DEBIT" | "CREDIT";
+    merchant: string;
     paymentMode: string;
     bank: string;
   }[];
@@ -92,11 +92,11 @@ export function createReportViewModel(
     ],
 
     spendingTrend: Object.entries(
-      report.cashflow_analysis.daily_spending ?? {}
-    ).map(([date, amount]) => ({
-      date,
-      amount: Number(amount),
-    })),
+  report.cashflow_analysis.daily_spending ?? {}
+).map(([date, amount]) => ({
+  day: date,
+  amount: Number(amount),
+})),
 
     categoryBreakdown: Object.entries(
       report.category_analysis.spending ?? {}
@@ -130,8 +130,8 @@ export function createReportViewModel(
       description: t.description,
       category: t.category,
       amount: t.amount,
-      type: t.transaction_type,
-      party: t.party,
+      type: t.transaction_type === "CREDIT" ? "CREDIT" : "DEBIT",
+      merchant: t.party,
       paymentMode: t.payment_mode,
       bank: t.bank,
     })),

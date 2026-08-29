@@ -7,18 +7,18 @@ type Props = {
   color: string;
 };
 
-const glow: Record<string, string> = {
-  cyan: "from-cyan-500/20",
-  violet: "from-violet-500/20",
-  emerald: "from-emerald-500/20",
-  rose: "from-rose-500/20",
-};
+// const glow: Record<string, string> = {
+//   cyan: "from-cyan-500/20",
+//   violet: "from-violet-500/20",
+//   emerald: "from-emerald-500/20",
+//   rose: "from-rose-500/20",
+// };
+
 
 export default function StatCard({
   title,
   value,
   subtitle,
-  color,
 }: Props) {
   return (
     <motion.div
